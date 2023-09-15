@@ -1,4 +1,4 @@
-export const Html = { name: 'HTML', icon: 'html', bg: '#dd4b25' }
+export const Html = { name: 'HTML', icon: '', bg: '#dd4b25' }
 export const Pug = { name: 'PUG', icon: 'pug', bg: '#a87871' }
 export const Css = { name: 'CSS', icon: 'css', bg: '#0870c2' }
 export const Sass = { name: 'sass', icon: 'sass', bg: '#cf6c9c' }
@@ -22,4 +22,9 @@ export const Illustration = {
   name: 'Adobe Illustrator',
   icon: 'adobe illustrator',
   bg: '#390808',
+}
+export const Sockets = {
+  name: 'Sockets',
+  icon: 'sockets',
+  bg: '#090909',
 }

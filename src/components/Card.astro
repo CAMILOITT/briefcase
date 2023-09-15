@@ -53,13 +53,17 @@ const {
     gap: 20px;
     padding: 30px;
     animation-name: introImg;
-    animation-timeline: view(y 15% 20%);
-    animation-duration: 2s;
+    animation-timeline: view(y 20% 20%);
+    /* animation-duration: 2s; */
     --right: 250px;
     --opacity: 0;
+    --top: 15px;
   }
   .info-card {
     padding: 30px;
+    transition: 0.5s;
+    opacity: var(--opacity);
+    translate: 0 var(--top);
   }
   .img-card {
     aspect-ratio: 2/1.5;
@@ -89,6 +93,7 @@ const {
   .links {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 1rem;
   }
 
@@ -98,6 +103,7 @@ const {
     font-weight: bold;
     padding: 0.5rem 1rem;
   }
+
   /* cambio de propiedades */
   @keyframes introImg {
     from {
@@ -107,6 +113,7 @@ const {
     to {
       --right: 0px;
       --opacity: 1;
+      --top: 0;
     }
   }
 </style>
