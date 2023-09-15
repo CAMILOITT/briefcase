@@ -1,0 +1,53 @@
+---
+import listProject from '../const/projects'
+import Card from './Card.astro'
+---
+
+<section class="projects">
+  <!-- a;adir una descripcion larga -->
+  <!-- a;adir caracteristicas de la aplicacion como minimo 3 y como maximo 5 -->
+  {
+    listProject.map(({ title, description, img, tag }) => (
+      <Card
+        title={title}
+        description={description}
+        img={img.src}
+        listTech={tag}
+      />
+    ))
+  }
+  <!-- <Card
+    title="Pixel Art"
+    description="Una aplicación de dibujo de pixel art que permite a los usuarios crear obras de arte detalladas pixel a pixel. Con una interfaz intuitiva, los artistas pueden dar vida a sus ideas en forma de arte pixelado. Además, ofrece la opción de exportar las creaciones en formatos populares para compartir fácilmente en línea o utilizar en proyectos"
+    img={pixelArtImg.src}
+  />
+  <Card
+    title="Message Hub"
+    description="página web de mensajeria"
+    img={videoCallImg.src}
+  />
+  <Card
+    title="VideoCall"
+    description="página web para hacer videollamadas"
+    img={chatHubImg.src}
+  /> -->
+</section>
+
+<style>
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    gap: 0.5rem;
+    position: relative;
+    scroll-timeline: --project y;
+    max-width: 100dvw;
+  }
+</style>
+
+<!--
+    description="página web para dibujar en pixeles"
+    -->

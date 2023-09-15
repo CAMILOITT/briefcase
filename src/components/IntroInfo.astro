@@ -1,0 +1,80 @@
+---
+import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
+import GithubIcon from '../assets/icons/social/GithubIcon.astro'
+import CVIcon from '../assets/icons/social/CVIcon.astro'
+---
+
+<div class="info-me">
+  <h1 class="name">Camilo Torres</h1>
+  <h2 class="profession">Fullstack Developer</h2>
+  <p class="introduction">
+    ¡Hola! Soy un apasionado desarrollador. Mi enfoque se centra en crear
+    experiencias web excepcionales y funcionales. Bienvenido a mi portafolio,
+    donde podrás explorar algunos de mis proyectos y conocer más sobre mi
+    trabajo en el emocionante mundo del desarrollo web.
+  </p>
+  <div class="navegation">
+    <div class="social">
+      <a
+        href=""
+        target="_blank"
+        rel="noopener noreferrer">
+        <LinkedinIcon />
+      </a>
+      <a
+        href=""
+        target="_blank"
+        rel="noopener noreferrer">
+        <GithubIcon />
+      </a>
+      <a
+        href="https://docs.google.com/document/d/15GofteV8oRYbcxbblRIbflobqQmu1T2mOgOQV3CPCVU/edit?fbclid=IwAR2YNFAyqwdMW-dg4-eig54dRJqy7r7Y9GtCDi6HLhR2mhfQTyCOo6cjjnw"
+        target="_blank"
+        rel="noopener noreferrer">
+        <CVIcon />
+      </a>
+    </div>
+    <a href="">Contactame</a>
+  </div>
+</div>
+
+<style>
+  .info-me {
+    max-width: 500px;
+  }
+  .name {
+    font-size: 4rem;
+  }
+  .profession {
+    margin-block: 0rem 1rem;
+  }
+  .navegation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+  .navegation > a {
+    color: #1b1930;
+    text-decoration: none;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  /* links social */
+  .social {
+    display: flex;
+    gap: 1rem;
+  }
+  .social a {
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.283);
+    display: grid;
+    place-content: center;
+    padding: 2px;
+    border-radius: 3px;
+  }
+</style>

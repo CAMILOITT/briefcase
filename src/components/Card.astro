@@ -1,0 +1,112 @@
+---
+import TagTech from './TagTech.astro'
+interface Props {
+  title: string
+  description: string
+  img?: string
+  listTech?: { name: string; icon: string; bg: string }[]
+}
+
+const {
+  title,
+  description,
+  img = 'https://denisechandler.com/wp-content/themes/portfolio_oct2021/images/banner_bkg.jpg',
+  listTech,
+} = Astro.props
+---
+
+<div class="card">
+  <div class="info-card">
+    <h2 class="title">{title}</h2>
+    <p class="description">{description}</p>
+    <h3 class="subtitle">Tecnologías</h3>
+    <ul class="list-tech">
+      {
+        listTech?.map(({ name, icon, bg }) => (
+          <TagTech
+            name={name}
+            bg={bg}
+          />
+        ))
+      }
+    </ul>
+    <div class="links">
+      <!-- llamar mas la atencion -->
+      <a href="">ver demo</a>
+      <!-- no llamar tanto la atencion -->
+      <a href="">ver código</a>
+    </div>
+  </div>
+  <img
+    src={img}
+    alt=""
+    class="img-card"
+  />
+</div>
+
+<style>
+  .card {
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: 500px 700px;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+    animation-name: introImg;
+    animation-timeline: view(y 15% 20%);
+    animation-duration: 2s;
+    --right: 250px;
+    --opacity: 0;
+  }
+  .info-card {
+    padding: 30px;
+  }
+  .img-card {
+    aspect-ratio: 2/1.5;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    border-radius: 15px;
+    translate: var(--right);
+    transition: 0.5s;
+    opacity: var(--opacity);
+  }
+
+  .title {
+    margin-bottom: 1rem;
+  }
+  .description {
+    margin-block: 0.5rem;
+  }
+  .subtitle {
+    margin-block: 0.7rem;
+  }
+  .list-tech {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+  .links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  .links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+  }
+  /* cambio de propiedades */
+  @keyframes introImg {
+    from {
+      --right: 250px;
+    }
+
+    to {
+      --right: 0px;
+      --opacity: 1;
+    }
+  }
+</style>

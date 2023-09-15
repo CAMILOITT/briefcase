@@ -1,0 +1,32 @@
+---
+interface Props {
+  name: string
+  bg: string
+}
+
+const { name, bg } = Astro.props
+---
+
+<li style={`background: ${bg}`}>
+  <span class="icon-tech"></span>
+  <span>{name}</span>
+</li>
+
+<style>
+  li {
+    padding: 0.5rem 1rem;
+    background: white;
+    color: black;
+    width: min-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: white;
+  }
+  .icon-tech {
+    width: 1rem;
+    height: 1rem;
+    background: white;
+  }
+</style>

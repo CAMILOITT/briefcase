@@ -1,0 +1,75 @@
+---
+const listknowledgeTech = [
+  // front
+  { name: 'HTML', icon: 'html' },
+  { name: 'PUG', icon: 'pug' },
+  { name: 'CSS', icon: 'css' },
+  { name: 'sass', icon: 'sass' },
+  { name: 'Tailwind', icon: 'tailwind' },
+  { name: 'JavaScript', icon: 'js' },
+  { name: 'TypeScript', icon: 'ts' },
+  { name: 'React', icon: 'react' },
+  { name: 'Astro', icon: 'astro' },
+  // back
+  { name: 'Node', icon: 'nodejs' },
+  { name: 'Express', icon: 'express' },
+  { name: 'MongoDB', icon: 'mongodb' },
+  { name: 'postgreSQL', icon: 'postgresql' },
+  // otros
+  { name: 'Git', icon: 'git' },
+  { name: 'GitHub', icon: 'github' },
+  { name: 'Figma', icon: 'figma' },
+  { name: 'Adobe Illustrator', icon: 'adobe illustrator' },
+]
+---
+
+<div class="skills">
+  <h2>Conociminentos</h2>
+  <ul class="list-skills">
+    {
+      listknowledgeTech.map(({ name }) => (
+        <li
+          class="skill"
+          data-name={name}>
+          {name}
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .skills {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 250px;
+    color: white;
+  }
+  h2 {
+    margin-bottom: 1rem;
+    grid-column: span 2;
+  }
+  .list-skills {
+    --gap: 5px;
+    --size: 50px;
+    --quantity: 5;
+    --quantity-tech: 17;
+    list-style: decimal;
+    position: relative;
+    position: relative;
+    outline: 1px solid white;
+    overflow: hidden;
+    width: calc(var(--size) * var(--quantity) + var(--gap) * var(--quantity));
+    height: calc(var(--size) + var(--gap) * 2);
+  }
+  .skill {
+    position: absolute;
+    aspect-ratio: 1;
+    width: var(--size);
+    background: lightsalmon;
+    top: calc(var(--gap));
+    left: calc(
+      var(--size) * var(--position-x) + var(--gap) * var(--position-x)
+    );
+  }
+</style>
