@@ -1,26 +1,78 @@
-<section>
-  <div>
+---
+import EmailIcon from '../assets/icons/social/EmailIcon.astro'
+import GithubIcon from '../assets/icons/social/GithubIcon.astro'
+import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
+---
+
+<section class="contacts">
+  <div class="card-contact">
     <h2>Contacto</h2>
-    <p>mensaje emocionante</p>
-    <a
-      href="http://"
-      target="_blank"
-      rel="noopener noreferrer">
-      linkedin
-    </a>
+    <p class="message">
+      ¡Estoy emocionado por conectarme contigo! <br /> No dudes en enviarme un
+      mensaje y estaré encantado de responder.
+      <!-- <br />
+       ¡Hablemos! Estoy aquí para escuchar tus ideas y proyectos. ¡Contáctame y
+      empecemos a trabajar juntos!
+      <br />
+       Si tienes alguna pregunta o simplemente quieres charlar sobre proyectos
+      interesantes, ¡no dudes en ponerte en contacto conmigo! Estoy aquí para
+      ayudarte. -->
+    </p>
+    <div class="links-contact">
+      <a
+        href="http://"
+        target="_blank"
+        rel="noopener noreferrer">
+        <LinkedinIcon />
+      </a>
 
-    <a
-      href="http://"
-      target="_blank"
-      rel="noopener noreferrer">
-      github
-    </a>
+      <a
+        href="http://"
+        target="_blank"
+        rel="noopener noreferrer">
+        <GithubIcon />
+      </a>
 
-    <a
-      href="http://"
-      target="_blank"
-      rel="noopener noreferrer">
-      correo
-    </a>
+      <a
+        href="http://"
+        target="_blank"
+        rel="noopener noreferrer">
+        <EmailIcon />
+      </a>
+    </div>
   </div>
 </section>
+
+<style>
+  .contacts {
+    display: grid;
+    place-content: center;
+    padding: 30px;
+    height: 50vh;
+  }
+
+  .card-contact {
+    padding: 20px;
+    background: whitesmoke;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .message {
+    max-width: 600px;
+  }
+
+  .links-contact {
+    display: flex;
+    gap: 10px;
+    padding-block: 10px;
+  }
+  .links-contact a {
+    color: black;
+  }
+</style>

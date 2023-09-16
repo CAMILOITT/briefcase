@@ -1,25 +1,41 @@
 ---
+import AstroIcon from '../assets/icons/tech/AstroIcon.astro'
+import CssIcon from '../assets/icons/tech/CssIcon.astro'
+import ExpressIcon from '../assets/icons/tech/ExpressIcon.astro'
+import FigmaIcon from '../assets/icons/tech/FigmaIcon.astro'
+import GitIcon from '../assets/icons/tech/GitIcon.astro'
+import GithubIcon from '../assets/icons/tech/GithubIcon.astro'
+import HtmlIcon from '../assets/icons/tech/HtmlIcon.astro'
+import JavascriptIcon from '../assets/icons/tech/JavascriptIcon.astro'
+import MongoDBIcon from '../assets/icons/tech/MongoDBIcon.astro'
+import NodeIcon from '../assets/icons/tech/NodeIcon.astro'
+import PostgreSQLIcon from '../assets/icons/tech/PostgreSQLIcon.astro'
+import PugIcon from '../assets/icons/tech/PugIcon.astro'
+import ReactIcon from '../assets/icons/tech/ReactIcon.astro'
+import SassIcon from '../assets/icons/tech/SassIcon.astro'
+import TailwindIcon from '../assets/icons/tech/TailwindIcon.astro'
+import TypescriptIcon from '../assets/icons/tech/TypescriptIcon.astro'
 const listknowledgeTech = [
   // front
-  { name: 'HTML', icon: 'html' },
-  { name: 'PUG', icon: 'pug' },
-  { name: 'CSS', icon: 'css' },
-  { name: 'sass', icon: 'sass' },
-  { name: 'Tailwind', icon: 'tailwind' },
-  { name: 'JavaScript', icon: 'js' },
-  { name: 'TypeScript', icon: 'ts' },
-  { name: 'React', icon: 'react' },
-  { name: 'Astro', icon: 'astro' },
+  { name: 'HTML', Icon: HtmlIcon },
+  { name: 'PUG', Icon: PugIcon },
+  { name: 'CSS', Icon: CssIcon },
+  { name: 'sass', Icon: SassIcon },
+  { name: 'Tailwind', Icon: TailwindIcon },
+  { name: 'JavaScript', Icon: JavascriptIcon },
+  { name: 'TypeScript', Icon: TypescriptIcon },
+  { name: 'React', Icon: ReactIcon },
+  { name: 'Astro', Icon: AstroIcon },
   // back
-  { name: 'Node', icon: 'nodejs' },
-  { name: 'Express', icon: 'express' },
-  { name: 'MongoDB', icon: 'mongodb' },
-  { name: 'postgreSQL', icon: 'postgresql' },
+  { name: 'Node', Icon: NodeIcon },
+  { name: 'Express', Icon: ExpressIcon },
+  { name: 'MongoDB', Icon: MongoDBIcon },
+  { name: 'postgreSQL', Icon: PostgreSQLIcon },
   // otros
-  { name: 'Git', icon: 'git' },
-  { name: 'GitHub', icon: 'github' },
-  { name: 'Figma', icon: 'figma' },
-  { name: 'Adobe Illustrator', icon: 'adobe illustrator' },
+  { name: 'Git', Icon: GitIcon },
+  { name: 'GitHub', Icon: GithubIcon },
+  { name: 'Figma', Icon: FigmaIcon },
+  // { name: 'Adobe Illustrator', icon:  },
 ]
 ---
 
@@ -27,11 +43,11 @@ const listknowledgeTech = [
   <h2>Conociminentos</h2>
   <ul class="list-skills">
     {
-      listknowledgeTech.map(({ name }) => (
+      listknowledgeTech.map(({ name, Icon }) => (
         <li
           class="skill"
           data-name={name}>
-          {name}
+          <Icon />
         </li>
       ))
     }
@@ -50,26 +66,42 @@ const listknowledgeTech = [
     grid-column: span 2;
   }
   .list-skills {
+    --columns: 5;
+    --rows: 4;
     --gap: 5px;
     --size: 50px;
-    --quantity: 5;
-    --quantity-tech: 17;
-    list-style: decimal;
-    position: relative;
-    position: relative;
-    outline: 1px solid white;
     overflow: hidden;
-    width: calc(var(--size) * var(--quantity) + var(--gap) * var(--quantity));
-    height: calc(var(--size) + var(--gap) * 2);
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(var(--columns), var(--size));
+    gap: var(--gap);
+    width: calc(var(--size) * var(--columns) + var(--gap) * var(--columns));
+    height: calc(var(--size) * var(--rows) + var(--gap) * var(--rows));
   }
   .skill {
-    position: absolute;
-    aspect-ratio: 1;
     width: var(--size);
+    height: var(--size);
     background: lightsalmon;
-    top: calc(var(--gap));
-    left: calc(
-      var(--size) * var(--position-x) + var(--gap) * var(--position-x)
-    );
+    animation: moveList 15s infinite alternate;
+    display: grid;
+    place-content: center;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .skill > svg {
+    width: 100%;
+    height: 100%;
+    stroke: white;
+    stroke-width: 2px;
+  }
+  @keyframes moveList {
+    25%,
+    70% {
+      translate: 0 0;
+    }
+    to,
+    75% {
+      translate: 0 -100%;
+    }
   }
 </style>
