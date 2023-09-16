@@ -2,21 +2,21 @@
 interface Props {
   name: string
   bg: string
-  Icon?: any
 }
 
-const { name, bg, Icon } = Astro.props
+const { name, bg } = Astro.props
 ---
 
 <li
   style={`background: ${bg}`}
   class="tag">
+  <slot />
   <span class="tech">{name}</span>
 </li>
 
 <style>
   .tag {
-    padding: 0.5rem 1rem;
+    padding: 0.2rem 0.6rem;
     background: white;
     color: black;
     width: min-content;
@@ -25,9 +25,6 @@ const { name, bg, Icon } = Astro.props
     align-items: center;
     gap: 5px;
     color: white;
-    animation-name: introTag;
-    /* animation-timeline: view(y 15% 20%); */
-    animation-range: entry 15% contain 25%;
     font-size: 0.9rem;
   }
 
@@ -38,7 +35,7 @@ const { name, bg, Icon } = Astro.props
     }
   }
 
-  .icon-tech {
+  svg {
     width: 1rem;
     height: 1rem;
     background: white;

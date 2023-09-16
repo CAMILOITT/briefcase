@@ -26,6 +26,6 @@ const listProjects = [
     img: VideoCall,
     tag: [TypeScript, Css, React, Node, Sockets],
   },
-]
+] as const
 
 export default listProjects

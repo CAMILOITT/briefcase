@@ -3,8 +3,12 @@ import TagTech from './TagTech.astro'
 interface Props {
   title: string
   description: string
+  listTech: ReadonlyArray<{
+    name: string
+    Icon: (_props: Record<string, any>) => any
+    bg: string
+  }>
   img?: string
-  listTech?: { name: string; icon: string; bg: string }[]
 }
 
 const {
@@ -22,11 +26,15 @@ const {
     <h3 class="subtitle">Tecnologías</h3>
     <ul class="list-tech">
       {
-        listTech?.map(({ name, icon, bg }) => (
+        listTech?.map(({ name, Icon, bg }) => (
           <TagTech
             name={name}
-            bg={bg}
-          />
+            bg={bg}>
+            <Icon
+              width="1.5rem"
+              height="1.5rem"
+            />
+          </TagTech>
         ))
       }
     </ul>
@@ -102,6 +110,28 @@ const {
     text-decoration: none;
     font-weight: bold;
     padding: 0.5rem 1rem;
+    position: relative;
+  }
+  .links a::before {
+    content: '→';
+    position: absolute;
+    left: -5px;
+    transition: 0.1s;
+    opacity: 0;
+  }
+
+  .links a:hover::before {
+    opacity: 1;
+    animation: arrow 0.5s infinite alternate;
+  }
+
+  @keyframes arrow {
+    to {
+      translate: 0;
+    }
+    from {
+      translate: 3px;
+    }
   }
 
   /* cambio de propiedades */
