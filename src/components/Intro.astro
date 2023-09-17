@@ -9,13 +9,19 @@ import Skills from './Skills.astro'
 </section>
 
 <style>
-  section {
-    height: 100vh;
+  .intro {
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 50px;
+    padding: 20px;
     color: white;
     gap: 0.5rem;
+  }
+  @media screen and (width <= 700px) {
+    .intro {
+      flex-direction: column;
+      gap: 40px;
+    }
   }
 </style>

@@ -34,13 +34,17 @@ import { ListSkill } from '../const/skills'
     --rows: 3;
     --gap: 5px;
     --size: 50px;
+    --displacement-y: 1;
+    --displacement-x: 0;
     overflow: hidden;
     display: grid;
     list-style: none;
     grid-template-columns: repeat(var(--columns), var(--size));
     gap: var(--gap);
-    width: calc(var(--size) * var(--columns) + var(--gap) * var(--columns));
-    height: calc(var(--size) * var(--rows) + var(--gap) * var(--rows));
+    width: calc(
+      var(--size) * var(--columns) + var(--gap) * (var(--columns) - 1)
+    );
+    height: calc(var(--size) * var(--rows) + var(--gap) * (var(--rows) - 1));
     padding: 0 35px;
     box-sizing: content-box;
   }
@@ -90,7 +94,44 @@ import { ListSkill } from '../const/skills'
     }
     to,
     75% {
-      translate: 0 -100%;
+      translate: calc(100% * var(--displacement-x))
+        calc(100% * var(--displacement-y)+ var(--gap));
+    }
+  }
+
+  @media screen and (width <= 900px) {
+    .list-skills {
+      --columns: 3;
+      --rows: 4;
+      --gap: 5px;
+      --size: 50px;
+
+      --displacement-y: -2;
+      --displacement-x: 0;
+    }
+  }
+
+  @media screen and (width <= 700px) {
+    .list-skills {
+      --columns: 6;
+      --rows: 2;
+      --gap: 5px;
+      --size: 50px;
+
+      --displacement-y: -1;
+      --displacement-x: 0;
+    }
+  }
+
+  @media screen and (width <= 425px) {
+    .list-skills {
+      --columns: 4;
+      --rows: 3;
+      --gap: 5px;
+      --size: 50px;
+
+      --displacement-y: -2;
+      --displacement-x: 0;
     }
   }
 </style>
