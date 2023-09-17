@@ -1,14 +1,14 @@
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  button,
-  input {
-    outline: none;
-    border: none;
-    font-size: unset;
-  }
-  body {
-    background: #1b1930;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button,
+input {
+  outline: none;
+  border: none;
+  font-size: unset;
+}
+body {
+  background: #1b1930;
+}
