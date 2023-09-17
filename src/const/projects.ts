@@ -3,7 +3,6 @@ import messageHub from '../assets/img/chatHub.png'
 import VideoCall from '../assets/img/videoConnect.png'
 import { Css, Express, MongoDb, Node, React, Sockets, TypeScript } from './tech'
 
-// falta sockets
 const listProjects = [
   {
     title: 'Pixel Art',

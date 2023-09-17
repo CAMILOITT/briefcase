@@ -4,8 +4,6 @@ import Card from './Card.astro'
 ---
 
 <section class="projects">
-  <!-- a;adir una descripcion larga -->
-  <!-- a;adir caracteristicas de la aplicacion como minimo 3 y como maximo 5 -->
   {
     listProject.map(({ title, description, img, tag }) => (
       <Card
@@ -32,7 +30,3 @@ import Card from './Card.astro'
     max-width: 100dvw;
   }
 </style>
-
-<!--
-    description="página web para dibujar en pixeles"
-    -->
