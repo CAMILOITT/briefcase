@@ -8,15 +8,14 @@ interface Props {
     Icon: (_props: Record<string, any>) => any
     bg: string
   }>
-  img?: string
+  img: string
+  links: {
+    demo: string
+    code: string
+  }
 }
 
-const {
-  title,
-  description,
-  img = 'https://denisechandler.com/wp-content/themes/portfolio_oct2021/images/banner_bkg.jpg',
-  listTech,
-} = Astro.props
+const { title, description, img, listTech, links } = Astro.props
 ---
 
 <div class="card">
@@ -39,8 +38,8 @@ const {
       }
     </ul>
     <div class="links">
-      <a href="">ver demo</a>
-      <a href="">ver código</a>
+      {links.demo && <a href={links.demo}>ver demo</a>}
+      <a href={links.code}>ver código</a>
     </div>
   </div>
   <img

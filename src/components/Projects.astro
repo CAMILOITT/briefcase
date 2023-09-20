@@ -5,12 +5,13 @@ import Card from './Card.astro'
 
 <section class="projects">
   {
-    listProject.map(({ title, description, img, tag }) => (
+    listProject.map(({ title, description, img, tag, links }) => (
       <Card
         title={title}
         description={description}
         img={img.src}
         listTech={tag}
+        links={links}
       />
     ))
   }
