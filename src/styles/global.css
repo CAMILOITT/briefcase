@@ -1,6 +1,8 @@
 @font-face {
   font-family: 'Poppins';
-  src: url('/public/fonts/Poppins') format('truetype');
+  font-weight: medium;
+  font-style: normal;
+  src: url('/public/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
 }
 
 :root {
@@ -23,4 +25,8 @@ input {
 }
 body {
   background: #1b1930;
+}
+
+p {
+  line-height: 1.5rem;
 }
