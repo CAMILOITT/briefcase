@@ -17,14 +17,13 @@ const { name, bg } = Astro.props
 <style>
   .tag {
     padding: 0.2rem 0.6rem;
-    background: white;
     color: black;
     width: min-content;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-    color: white;
+    color: var(--text);
     font-size: 0.9rem;
   }
 
@@ -38,8 +37,6 @@ const { name, bg } = Astro.props
   svg {
     width: 1rem;
     height: 1rem;
-    background: white;
-  }
-  .tech {
+    background: var(--text);
   }
 </style>

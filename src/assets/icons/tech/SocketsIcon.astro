@@ -5,21 +5,29 @@ const { width = 32, height = 32 } = Astro.props
 <svg
   id="Capa_2"
   xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 15.61 15.61"
+  viewBox="0 0 17 17"
   width={width}
   height={height}
-  stroke-width="0.75px"
-  stroke="currentColor"
-  fill="none"
+  stroke-width="1px"
   stroke-linecap="round"
   stroke-linejoin="round">
+  <def>
+    <style>
+      .triangle-sockets {
+        fill: currentColor;
+        stroke: currentColor;
+        stroke-width: 0.5px;
+      }
+    </style>
+  </def>
+
   <g>
     <polygon
-      class="cls-1"
+      class="triangle-sockets"
       points="10.77 3.43 6.38 7.03 8.4 7.05 10.77 3.43">
     </polygon>
     <polygon
-      class="cls-1"
+      class="triangle-sockets"
       points="4.34 12.36 9.2 8.39 7.08 8.37 4.34 12.36">
     </polygon>
   </g>
@@ -27,6 +35,8 @@ const { width = 32, height = 32 } = Astro.props
     class="cls-2"
     cx="7.81"
     cy="7.81"
+    fill="none"
+    stroke="currentColor"
     r="7.31">
   </circle>
 </svg>

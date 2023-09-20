@@ -35,7 +35,7 @@ export const TypeScript = {
   Icon: TypescriptIcon,
   bg: '#377cc8',
 }
-export const React = { name: 'React', Icon: ReactIcon, bg: '#0cdaff' }
+export const React = { name: 'React', Icon: ReactIcon, bg: '#0babea' }
 export const Astro = { name: 'Astro', Icon: AstroIcon, bg: '#ff5910' }
 export const Node = { name: 'Node', Icon: NodeIcon, bg: '#86cf2f' }
 export const Express = { name: 'Express', Icon: ExpressIcon, bg: '#393939' }
