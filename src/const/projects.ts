@@ -22,7 +22,7 @@ const listProjects = [
     img: messageHub,
     tag: [TypeScript, Css, React, Node, Express, MongoDb, Sockets],
     links: {
-      demo: '',
+      demo: 'https://messagehub-six.vercel.app',
       code: 'https://github.com/CAMILOITT/MESSAGEHUB',
     },
   },
@@ -33,7 +33,7 @@ const listProjects = [
     img: VideoCall,
     tag: [TypeScript, Css, React, Node, Sockets],
     links: {
-      demo: 'https://dulcet-gecko-2d86af.netlify.app',
+      demo: '',
       code: 'https://github.com/CAMILOITT/web-cam',
     },
   },
