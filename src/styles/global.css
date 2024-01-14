@@ -30,3 +30,8 @@ body {
 p {
   line-height: 1.5rem;
 }
+
+:is(p, h1, h2, h3, a)::selection {
+  color: black;
+  background: white;
+}
