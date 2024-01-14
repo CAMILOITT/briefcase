@@ -4,6 +4,24 @@ import GithubIcon from '../assets/icons/social/GithubIcon.astro'
 import CVIcon from '../assets/icons/social/CVIcon.astro'
 ---
 
+<script>
+  const button = document.querySelector('#BtnContact') as HTMLButtonElement
+
+  button.addEventListener('mousemove', e => {
+    const { clientX, clientY } = e
+
+    const { left, top } = (
+      e.currentTarget as HTMLButtonElement
+    ).getBoundingClientRect()
+
+    const x = Math.floor(clientX - left)
+    const y = Math.floor(clientY - top)
+
+    button.style.setProperty('--y', y + 'px')
+    button.style.setProperty('--x', x + 'px')
+  })
+</script>
+
 <div class="info-me">
   <h1 class="name">Camilo Torres</h1>
   <h2 class="profession">Fullstack Developer</h2>
@@ -34,7 +52,11 @@ import CVIcon from '../assets/icons/social/CVIcon.astro'
         <CVIcon />
       </a>
     </div>
-    <a href="#Contact">Contactame</a>
+    <a
+      href="#Contact"
+      id="BtnContact"
+      >Contactame</a
+    >
   </div>
 </div>
 
@@ -51,6 +73,10 @@ import CVIcon from '../assets/icons/social/CVIcon.astro'
     margin-block: 0rem 1rem;
     letter-spacing: 0.08rem;
   }
+  .introduction::selection {
+    background: white;
+    color: black;
+  }
   .navegation {
     display: flex;
     justify-content: space-between;
@@ -64,6 +90,42 @@ import CVIcon from '../assets/icons/social/CVIcon.astro'
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
+  }
+  .navegation > a {
+    --x: 50%;
+    --y: 50%;
+    color: #1b1930;
+    text-decoration: none;
+    background: var(--text);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 0px;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s;
+  }
+  .navegation > a::before {
+    --size: 0;
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    top: var(--y);
+    left: var(--x);
+    position: absolute;
+    translate: -50% -50%;
+    backdrop-filter: invert(150%);
+    border-radius: 50%;
+    transition:
+      0.5s width,
+      0.5s height,
+      0.5s opacity;
+    opacity: 0.5;
+  }
+
+  .navegation > a:hover::before {
+    --size: 100px;
+    opacity: 1;
   }
 
   /* links social */
