@@ -38,8 +38,22 @@ const { title, description, img, listTech, links } = Astro.props
       }
     </ul>
     <div class="links">
-      {links.demo && <a href={links.demo}>ver demo</a>}
-      <a href={links.code}>ver código</a>
+      {
+        links.demo && (
+          <a
+            href={links.demo}
+            target="_blank"
+            rel="noopener noreferrer">
+            ver demo
+          </a>
+        )
+      }
+      <a
+        href={links.code}
+        target="_blank"
+        rel="noopener noreferrer"
+        >ver código</a
+      >
     </div>
   </div>
   <img
@@ -62,6 +76,7 @@ const { title, description, img, listTech, links } = Astro.props
     --right: 250px;
     --opacity: 0;
     --top: 15px;
+    --rotate: 0;
   }
   .info-card {
     transition: 0.5s;
@@ -77,6 +92,7 @@ const { title, description, img, listTech, links } = Astro.props
     translate: var(--right);
     transition: 0.5s;
     opacity: var(--opacity);
+    rotate: var(--rotate);
   }
 
   .title {
@@ -134,12 +150,14 @@ const { title, description, img, listTech, links } = Astro.props
   @keyframes introImg {
     from {
       --right: 250px;
+      --rotate: 25deg;
     }
 
     to {
       --right: 0px;
       --opacity: 1;
       --top: 0;
+      --rotate: 0;
     }
   }
   @media screen and (width <=950px) {

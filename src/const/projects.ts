@@ -18,7 +18,7 @@ const listProjects = [
   {
     title: 'Message Hub',
     description:
-      'Un sitio web de mensajería que conecta a usuarios en tiempo real a través de chats individuales y grupales. Los usuarios pueden enviar mensajes de texto, imágenes, videos y documentos. Además, la plataforma ofrece notificaciones instantáneas para mantener a los usuarios actualizados. La seguridad de los datos es una prioridad, con cifrado de extremo a extremo para proteger la privacidad de las conversaciones.',
+      'Un sitio web de mensajería que conecta a usuarios en tiempo real a través de chats individuales. Además, la plataforma ofrece notificaciones instantáneas para mantener a los usuarios actualizados.',
     img: messageHub,
     tag: [TypeScript, Css, React, Node, Express, MongoDb, Sockets],
     links: {
@@ -27,9 +27,9 @@ const listProjects = [
     },
   },
   {
-    title: 'VideoCannect',
+    title: 'VideoConnect',
     description:
-      'Un sitio web de video llamadas que ofrece una experiencia de comunicación cara a cara en línea. Los usuarios pueden iniciar llamadas de video de alta calidad con amigos, familiares o colegas desde cualquier parte del mundo. La plataforma incluye funciones de chat, compartir pantalla y grabación de llamadas para una comunicación efectiva. Además, garantiza la seguridad de las conversaciones con encriptación de extremo a extremo.',
+      'Un sitio web de video llamadas que ofrece una experiencia de comunicación cara a cara en línea. Los usuarios pueden iniciar llamadas de video con amigos, familiares o colegas desde cualquier parte del mundo.',
     img: VideoCall,
     tag: [TypeScript, Css, React, Node, Sockets],
     links: {
