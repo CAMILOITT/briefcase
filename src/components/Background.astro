@@ -1,0 +1,40 @@
+---
+
+---
+
+<script>
+  import { Background } from '../effects/background/background'
+  const canvas = document.getElementById('Background') as HTMLCanvasElement
+  canvas.width = window.innerWidth
+  canvas.height = window.innerHeight
+  new Background(
+    canvas,
+    {
+      length: 1000,
+      size: 10,
+      colors: [
+        '#211c50',
+        '#2b2d74',
+        '#2284c1',
+        '#69328d',
+        '#dc348f',
+        '#e76790',
+        '#ea8aa3',
+      ],
+    },
+    { color: { h: 0, s: 0, l: 0, a: 0.08 } },
+  )
+</script>
+
+<canvas id="Background"></canvas>
+
+<style>
+  #Background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.8;
+    filter: blur(3px);
+  }
+</style>

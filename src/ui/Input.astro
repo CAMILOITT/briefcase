@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props {
+  propsLabel?: HTMLAttributes<'label'>
+}
+
+const { propsLabel } = Astro.props
+---
+
+<label {...propsLabel}>
+  <slot name="label" />
+  <slot name="input" />
+  <slot name="icon" />
+</label>
+
+<style>
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

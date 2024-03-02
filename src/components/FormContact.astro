@@ -1,0 +1,160 @@
+---
+import WarningIcon from '../assets/icons/info/WarningIcon.astro'
+---
+
+<script>
+  import { openNotification } from './notification/actions'
+  const form = document.querySelector('#FormContact')
+
+  form?.addEventListener('submit', async e => {
+    e.preventDefault()
+
+    const { name, email, message } = e.target as HTMLFormElement & {
+      name: HTMLInputElement
+      email: HTMLInputElement
+      message: HTMLInputElement
+    }
+
+    if (!name.value || !email.value || !message.value) return
+
+    const data = JSON.stringify({
+      name: name.value,
+      email: email.value,
+      message: message.value,
+    })
+
+    try {
+      const res = await fetch('/api/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/text' },
+        body: data,
+      })
+      const resMessage = await res.text()
+
+      openNotification({
+        time: 5000,
+        message: resMessage,
+        className: {
+          add: ['success'],
+          remove: ['error', 'hidden'],
+        },
+      })
+
+      name.value = ''
+      email.value = ''
+      message.value = ''
+    } catch (error) {
+      const message = (error as Error).message
+
+      openNotification({
+        time: 5000,
+        message,
+        className: {
+          add: ['error'],
+          remove: ['success', 'hidden'],
+        },
+      })
+    }
+  })
+</script>
+
+<form
+  class="form-contact"
+  id="FormContact">
+  <label
+    for="name"
+    class="form-label">
+    <input
+      type="text"
+      name="name"
+      id="name"
+      placeholder="Nombre"
+      class="label-input"
+      required
+    />
+    <WarningIcon />
+  </label>
+  <label
+    for="email"
+    class="form-label">
+    <input
+      type="text"
+      name="email"
+      id="email"
+      placeholder="Email"
+      class="label-input"
+      required
+    />
+    <WarningIcon />
+  </label>
+  <label
+    for="message"
+    class="form-label">
+    <textarea
+      name="message"
+      id="message"
+      cols="30"
+      rows="4"
+      class="label-message"
+      placeholder="Escribe tu mensaje..."
+      required
+    ></textarea>
+    <WarningIcon />
+  </label>
+  <button class="btn-contact">Enviar</button>
+</form>
+
+<style>
+  .form-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: clamp(300px, 90%, 400px);
+  }
+
+  .form-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .form-label:has(.label-message) {
+    align-items: flex-start;
+  }
+
+  .label-input {
+    width: clamp(200px, 90%, 500px);
+  }
+
+  .label-input,
+  .label-message {
+    border: none;
+    outline: none;
+    background: var(--text);
+    color: var(--bg);
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  .label-message {
+    resize: none;
+  }
+
+  .btn-contact {
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    align-self: start;
+  }
+</style>
+
+<style is:global>
+  .form-contact :not(:is(.label-input, .label-message):invalid:focus) + svg {
+    opacity: 0;
+  }
+
+  .form-contact :where(.label-input, .label-message) + svg {
+    color: red;
+    transition: 0.2s;
+  }
+</style>

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react",
+    "module": "ESNext"
   },
   "extends": "astro/tsconfigs/strict"
 }

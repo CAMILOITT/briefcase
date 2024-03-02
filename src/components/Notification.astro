@@ -1,0 +1,54 @@
+---
+
+---
+
+<div
+  class:list={['notification', 'hidden']}
+  id="Notification">
+  <slot name="message" />
+</div>
+
+<style>
+  .notification {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    translate: -50%;
+    padding: 10px;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.823);
+    font-weight: bold;
+    line-height: 1.9rem;
+    transition: 0.2s;
+    transition-timing-function: ease-in;
+  }
+
+  .hidden {
+    top: -25%;
+  }
+
+  .notification::before {
+    height: 1.9rem;
+  }
+
+  .notification:is(.success)::before {
+    content: url('../assets/icons/info/CheckIcon.svg');
+  }
+
+  .notification:is(.error)::before {
+    content: url('../assets/icons/info/WarningIcon.svg');
+  }
+
+  .success {
+    color: greenyellow;
+    padding: 5px 10px;
+  }
+
+  .error {
+    color: red;
+    padding: 5px 10px;
+  }
+</style>

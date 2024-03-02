@@ -2,9 +2,12 @@
 import EmailIcon from '../assets/icons/social/EmailIcon.astro'
 import GithubIcon from '../assets/icons/social/GithubIcon.astro'
 import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
+import FormContact from './FormContact.astro'
+import Notification from './Notification.astro'
 ---
 
 <section class="contacts">
+  <Notification id="Notification" />
   <div
     class="card-contact"
     id="Contact">
@@ -20,27 +23,31 @@ import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
       interesantes, ¡no dudes en ponerte en contacto conmigo! Estoy aquí para
       ayudarte. -->
     </p>
-    <div class="links-contact">
-      <a
-        href="https://www.linkedin.com/in/camilo-israel-torres-tufiño-812b6a235/"
-        target="_blank"
-        rel="noopener noreferrer">
-        <LinkedinIcon />
-      </a>
+    <div class="information-contact">
+      <FormContact />
 
-      <a
-        href="https://github.com/CAMILOITT"
-        target="_blank"
-        rel="noopener noreferrer">
-        <GithubIcon />
-      </a>
+      <div class="links-contact">
+        <a
+          href="https://www.linkedin.com/in/camilo-israel-torres-tufiño-812b6a235/"
+          target="_blank"
+          rel="noopener noreferrer">
+          <LinkedinIcon /> CAMILO TORRES
+        </a>
 
-      <a
-        href="mailto:camilocamilo5@outlook.com?subject=Solicitud de contacto&body=Estoy interesado en tu trabajo y me gustaría discutir oportunidades de trabajo junto."
-        target="_blank"
-        rel="noopener noreferrer">
-        <EmailIcon />
-      </a>
+        <a
+          href="https://github.com/CAMILOITT"
+          target="_blank"
+          rel="noopener noreferrer">
+          <GithubIcon /> CAMILOITT
+        </a>
+
+        <a
+          href="mailto:camilocamilo5@outlook.com?subject=Solicitud de contacto&body=Estoy interesado en tu trabajo y me gustaría discutir oportunidades de trabajo junto."
+          target="_blank"
+          rel="noopener noreferrer">
+          <EmailIcon /> camilocamilo5@outlook.com
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -50,7 +57,8 @@ import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* height: 100vh; */
+    padding-block: 50px;
   }
 
   .card-contact {
@@ -66,21 +74,35 @@ import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
     justify-content: center;
     align-items: center;
     text-align: center;
-    gap: 1rem;
+    gap: 1.4rem;
   }
 
   .message {
     max-width: 600px;
   }
 
+  .information-contact {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    gap: 20px 10px;
+  }
+
   .links-contact {
     display: flex;
-    gap: 10px;
-    padding-block: 10px;
+    flex-direction: column;
+    gap: 15px;
+    align-self: flex-end;
   }
   .links-contact a {
     color: var(--bg);
-    width: 60px;
-    height: 60px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 </style>
