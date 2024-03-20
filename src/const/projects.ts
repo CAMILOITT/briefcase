@@ -1,6 +1,3 @@
-import pixelDraw from '../assets/img/pixel_art.png'
-import messageHub from '../assets/img/chatHub.png'
-import VideoCall from '../assets/img/videoConnect.png'
 import { Css, Express, MongoDb, Node, React, Sockets, TypeScript } from './tech'
 
 const listProjects = [
@@ -8,7 +5,7 @@ const listProjects = [
     title: 'Pixel Art',
     description:
       'Un sitio web de dibujo de pixel art que permite a los usuarios crear obras de arte detalladas pixel a pixel. Con una interfaz intuitiva, los artistas pueden dar vida a sus ideas en forma de arte pixelado. Además, ofrece la opción de exportar las creaciones en formatos populares para compartir fácilmente en línea o utilizar en proyectos',
-    img: pixelDraw,
+    img: 'pixel_art',
     tag: [TypeScript, React, Css],
     links: {
       demo: 'https://pixel-draw-silk.vercel.app',
@@ -19,7 +16,7 @@ const listProjects = [
     title: 'Message Hub',
     description:
       'Un sitio web de mensajería que conecta a usuarios en tiempo real a través de chats individuales. Además, la plataforma ofrece notificaciones instantáneas para mantener a los usuarios actualizados.',
-    img: messageHub,
+    img: 'chat_hub',
     tag: [TypeScript, Css, React, Node, Express, MongoDb, Sockets],
     links: {
       demo: 'https://messagehub-six.vercel.app',
@@ -30,7 +27,7 @@ const listProjects = [
     title: 'VideoConnect',
     description:
       'Un sitio web de video llamadas que ofrece una experiencia de comunicación cara a cara en línea. Los usuarios pueden iniciar llamadas de video con amigos, familiares o colegas desde cualquier parte del mundo.',
-    img: VideoCall,
+    img: 'video_connect',
     tag: [TypeScript, Css, React, Node, Sockets],
     links: {
       demo: '',

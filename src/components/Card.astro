@@ -56,16 +56,23 @@ const { title, description, img, listTech, links } = Astro.props
       >
     </div>
   </div>
-  <img
-    src={img}
-    alt=""
-    class="img-card"
-  />
+  <picture class="img-card">
+    <source srcset={`${img}.avif`} />
+    <source srcset={`${img}.webp`} />
+    <source srcset={`${img}.png`} />
+    <img
+      loading="lazy"
+      src={`${img}.jpg`}
+      alt={title}
+      width="705"
+      height="441"
+    />
+  </picture>
 </div>
 
 <style>
   .card {
-    overflow-x: hidden;
+    overflow: hidden;
     display: grid;
     align-items: center;
     gap: 50px;
@@ -84,7 +91,8 @@ const { title, description, img, listTech, links } = Astro.props
     translate: 0 var(--top);
   }
   .img-card {
-    aspect-ratio: 2/1.5;
+    overflow: hidden;
+    aspect-ratio: 2/1.25;
     object-fit: cover;
     object-position: center;
     width: 100%;
@@ -93,6 +101,11 @@ const { title, description, img, listTech, links } = Astro.props
     transition: 0.5s;
     opacity: var(--opacity);
     rotate: var(--rotate);
+    & > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .title {

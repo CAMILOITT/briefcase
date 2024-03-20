@@ -12,36 +12,80 @@ import '../styles/global.css'
     <meta charset="utf-8" />
     <meta
       name="viewport"
-      content="width=device-width"
+      content="width=device-width,initial-scale=1"
     />
     <meta
       name="generator"
       content={Astro.generator}
     />
+    <title>{title}</title>
+
     <link
       rel="shortcut icon"
-      href="/icon-web-b.svg"
+      href="/icons/favicon/icon-web-b.svg"
       type="image/x-icon"
     />
     <meta
       name="keywords"
-      content="desarrollador web, fullstack, front-end, back-end, developer, portfolio, fullstack developer"
+      content="Camilo Torres, desarrollador web, fullstack, front-end, back-end, developer, portfolio, fullstack developer"
     />
+
     <meta
       name="description"
-      content="soy un desarrollador web"
+      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
+    />
+    <!-- Open Graph / Facebook -->
+    <meta
+      property="og:title"
+      content={title}
+    />
+    <meta
+      property="og:description"
+      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
+    />
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:site_name"
+      content={title}
+    />
+    <meta
+      property="og:url"
+      content="https://camiloitt.vercel.app"
+    />
+    <!-- Twitter -->
+
+    <meta
+      property="twitter:title"
+      content={title}
+    />
+    <meta
+      property="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      property="twitter:url"
+      content="https://camiloitt.vercel.app"
+    />
+    <meta
+      property="twitter:description"
+      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
     />
 
-    <title>{title}</title>
+    <link
+      rel="preload"
+      as="font"
+    />
   </head>
-
   <body>
     <slot />
   </body>
-</html>
 
-<style>
-  html {
-    scroll-behavior: smooth;
-  }
-</style>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</html>

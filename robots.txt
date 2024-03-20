@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+Sitemap: https://camiloitt.vercel.app/sitemap.xml
+Host: https://camiloitt.vercel.app

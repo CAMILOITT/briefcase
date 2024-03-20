@@ -2,6 +2,24 @@
 import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
 import GithubIcon from '../assets/icons/social/GithubIcon.astro'
 import CVIcon from '../assets/icons/social/CVIcon.astro'
+
+const socialMedia = [
+  {
+    name: 'Github',
+    url: 'https://github.com/camilo-torres',
+    Icon: GithubIcon,
+  },
+  {
+    name: 'Linkedin',
+    url: 'https://www.linkedin.com/in/camilo-torres-9b6b9a1b5/',
+    Icon: LinkedinIcon,
+  },
+  {
+    name: 'CV',
+    url: 'https://docs.google.com/document/d/15GofteV8oRYbcxbblRIbflobqQmu1T2mOgOQV3CPCVU/edit?fbclid=IwAR2YNFAyqwdMW-dg4-eig54dRJqy7r7Y9GtCDi6HLhR2mhfQTyCOo6cjjnw',
+    Icon: CVIcon,
+  },
+]
 ---
 
 <script>
@@ -33,30 +51,23 @@ import CVIcon from '../assets/icons/social/CVIcon.astro'
   </p>
   <div class="navegation">
     <div class="social">
-      <a
-        href="https://www.linkedin.com/in/camilo-israel-torres-tufiño-812b6a235/"
-        target="_blank"
-        rel="noopener noreferrer">
-        <LinkedinIcon />
-      </a>
-      <a
-        href="https://github.com/CAMILOITT"
-        target="_blank"
-        rel="noopener noreferrer">
-        <GithubIcon />
-      </a>
-      <a
-        href="https://docs.google.com/document/d/15GofteV8oRYbcxbblRIbflobqQmu1T2mOgOQV3CPCVU/edit?fbclid=IwAR2YNFAyqwdMW-dg4-eig54dRJqy7r7Y9GtCDi6HLhR2mhfQTyCOo6cjjnw"
-        target="_blank"
-        rel="noopener noreferrer">
-        <CVIcon />
-      </a>
+      {
+        socialMedia.map(({ name, url, Icon }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            arial-label={`link to me ${name} profile`}>
+            <Icon />
+          </a>
+        ))
+      }
     </div>
     <a
       href="#Contact"
-      id="BtnContact"
-      >Contactame</a
-    >
+      id="BtnContact">
+      Contactame
+    </a>
   </div>
 </div>
 

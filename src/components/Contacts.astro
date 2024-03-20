@@ -4,6 +4,27 @@ import GithubIcon from '../assets/icons/social/GithubIcon.astro'
 import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
 import FormContact from './FormContact.astro'
 import Notification from './Notification.astro'
+
+const socialLinks = [
+  {
+    name: 'Github',
+    url: 'https://github.com/camilo-torres',
+    Icon: GithubIcon,
+    txt: 'CAMILOITT',
+  },
+  {
+    name: 'Linkedin',
+    url: 'https://www.linkedin.com/in/camilo-torres-9b6b9a1b5/',
+    Icon: LinkedinIcon,
+    txt: 'CAMILO TORRES',
+  },
+  {
+    name: 'Email',
+    url: 'mailto:camilocamilo5@outlook.com?subject=Solicitud de contacto&body=Estoy interesado en tu trabajo y me gustaría discutir oportunidades de trabajo junto.',
+    Icon: EmailIcon,
+    txt: 'camilocamilo5@outlook.com',
+  },
+]
 ---
 
 <section class="contacts">
@@ -13,8 +34,8 @@ import Notification from './Notification.astro'
     id="Contact">
     <h2>Contactame</h2>
     <p class="message">
-      ¡Estoy emocionado por conectarme contigo! <br /> No dudes en enviarme un
-      mensaje y estaré encantado de responder.
+      ¡Estoy emocionado por conectarme contigo! <br /> No dudes en enviarme un mensaje
+      y estaré encantado de responder.
       <!-- <br />
        ¡Hablemos! Estoy aquí para escuchar tus ideas y proyectos. ¡Contáctame y
       empecemos a trabajar juntos!
@@ -25,28 +46,19 @@ import Notification from './Notification.astro'
     </p>
     <div class="information-contact">
       <FormContact />
-
       <div class="links-contact">
-        <a
-          href="https://www.linkedin.com/in/camilo-israel-torres-tufiño-812b6a235/"
-          target="_blank"
-          rel="noopener noreferrer">
-          <LinkedinIcon /> CAMILO TORRES
-        </a>
-
-        <a
-          href="https://github.com/CAMILOITT"
-          target="_blank"
-          rel="noopener noreferrer">
-          <GithubIcon /> CAMILOITT
-        </a>
-
-        <a
-          href="mailto:camilocamilo5@outlook.com?subject=Solicitud de contacto&body=Estoy interesado en tu trabajo y me gustaría discutir oportunidades de trabajo junto."
-          target="_blank"
-          rel="noopener noreferrer">
-          <EmailIcon /> camilocamilo5@outlook.com
-        </a>
+        {
+          socialLinks.map(({ name, url, Icon, txt }) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              arial-label={`link to me ${name} profile`}>
+              <Icon />
+              {txt}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -57,15 +69,12 @@ import Notification from './Notification.astro'
     display: flex;
     justify-content: center;
     align-items: center;
-    /* height: 100vh; */
-    padding-block: 50px;
+    padding-block: 90px;
   }
 
   .card-contact {
-    --size: 80%;
-    width: var(--size);
-    height: var(--size);
-    padding: 20px;
+    width: 80%;
+    padding: 50px 20px 20px;
     background: rgba(255, 255, 255, 0.668);
     backdrop-filter: blur(5px);
     border-radius: 5px;
@@ -75,6 +84,20 @@ import Notification from './Notification.astro'
     align-items: center;
     text-align: center;
     gap: 1.4rem;
+    animation: contact-in;
+    animation-timeline: view(y 20% -30%);
+    animation-duration: 0.25s;
+  }
+
+  @keyframes contact-in {
+    from {
+      width: 50%;
+      opacity: 0;
+    }
+    to {
+      width: 80%;
+      opacity: 1;
+    }
   }
 
   .message {
@@ -88,6 +111,7 @@ import Notification from './Notification.astro'
     width: 100%;
     align-items: center;
     gap: 20px 10px;
+    padding-block: 2.3rem;
   }
 
   .links-contact {

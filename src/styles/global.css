@@ -3,6 +3,7 @@
   font-weight: medium;
   font-style: normal;
   src: url('/public/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+  font-display: swap;
 }
 
 :root {
