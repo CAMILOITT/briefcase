@@ -57,9 +57,18 @@ const { title, description, img, listTech, links } = Astro.props
     </div>
   </div>
   <picture class="img-card">
-    <source srcset={`${img}.avif`} />
-    <source srcset={`${img}.webp`} />
-    <source srcset={`${img}.png`} />
+    <source
+      srcset={`${img}.avif`}
+      type="image/avif"
+    />
+    <source
+      srcset={`${img}.webp`}
+      type="image/webp"
+    />
+    <source
+      srcset={`${img}.png`}
+      type="image/png"
+    />
     <img
       loading="lazy"
       src={`${img}.jpg`}

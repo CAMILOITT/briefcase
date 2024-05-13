@@ -5,6 +5,9 @@ interface Props {
 const { title } = Astro.props
 
 import '../styles/global.css'
+
+const Description =
+  'Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel.'
 ---
 
 <html lang="es">
@@ -25,14 +28,20 @@ import '../styles/global.css'
       href="/icons/favicon/icon-web-b.svg"
       type="image/x-icon"
     />
+
+    <link
+      rel="canonical"
+      href="https://camiloitt.vercel.app"
+    />
+
     <meta
       name="keywords"
-      content="Camilo Torres, desarrollador web, fullstack, front-end, back-end, developer, portfolio, fullstack developer"
+      content="Camilo Torres, camiloitt, CAMILOITT, desarrollador, desarrollador web, fullstack, front-end, back-end, developer, portfolio, fullstack developer"
     />
 
     <meta
       name="description"
-      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
+      content={Description}
     />
 
     <!-- Open Graph / Facebook -->
@@ -42,7 +51,7 @@ import '../styles/global.css'
     />
     <meta
       property="og:description"
-      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
+      content={Description}
     />
     <meta
       property="og:type"
@@ -78,7 +87,7 @@ import '../styles/global.css'
     />
     <meta
       property="twitter:description"
-      content="Bienvenidos a mi portafolio. Soy Camilo Torres, desarrollador web. Con conocimientos en React, Vue.js, Node.js y más, estoy listo para llevar tu proyecto al siguiente nivel."
+      content={Description}
     />
 
     <meta
