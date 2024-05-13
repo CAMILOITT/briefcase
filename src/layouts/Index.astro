@@ -99,6 +99,27 @@ const Description =
       rel="preload"
       as="font"
     />
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "ProfilePage",
+        "name": "Camilo Torres",
+        "telephone": "0998558785",
+        "email": "camilocamilo5@outlook.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Quito",
+          "addressRegion": "Pichincha",
+          "addressCountry": "Ecuador"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "lunes a viernes",
+          "opens": "10:00",
+          "closes": "17:00"
+        }
+      }
+    </script>
   </head>
   <body>
     <slot />
