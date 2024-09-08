@@ -1,4 +1,5 @@
 ---
+import GithubIcon from '../assets/icons/tech/GithubIcon.astro'
 import TagTech from './TagTech.astro'
 interface Props {
   title: string
@@ -19,43 +20,6 @@ const { title, description, img, listTech, links } = Astro.props
 ---
 
 <div class="card">
-  <div class="info-card">
-    <h2 class="title">{title}</h2>
-    <p class="description">{description}</p>
-    <h3 class="subtitle">Tecnologías</h3>
-    <ul class="list-tech">
-      {
-        listTech?.map(({ name, Icon, bg }) => (
-          <TagTech
-            name={name}
-            bg={bg}>
-            <Icon
-              width="1.5rem"
-              height="1.5rem"
-            />
-          </TagTech>
-        ))
-      }
-    </ul>
-    <div class="links">
-      {
-        links.demo && (
-          <a
-            href={links.demo}
-            target="_blank"
-            rel="noopener noreferrer">
-            ver demo
-          </a>
-        )
-      }
-      <a
-        href={links.code}
-        target="_blank"
-        rel="noopener noreferrer"
-        >ver código</a
-      >
-    </div>
-  </div>
   <picture class="img-card">
     <source
       srcset={`${img}.avif`}
@@ -77,121 +41,177 @@ const { title, description, img, listTech, links } = Astro.props
       height="441"
     />
   </picture>
+  <div class="info-card">
+    <h2 class="title">{title}</h2>
+    <p class="description">{description}</p>
+    <h3 class="subtitle">Tecnologías</h3>
+    <ul class="list-tech">
+      {
+        listTech?.map(({ name, Icon, bg }) => (
+          <TagTech
+            name={name}
+            bg={bg}>
+            <Icon
+              width="1.5rem"
+              height="1.5rem"
+            />
+          </TagTech>
+        ))
+      }
+    </ul>
+    <div class="links">
+      <a
+        href={links.code}
+        target="_blank"
+        rel="noopener noreferrer">
+        <GithubIcon />
+      </a>
+    </div>
+  </div>
 </div>
 
 <style>
-  .card {
-    overflow: hidden;
-    display: grid;
-    align-items: center;
-    gap: 50px;
-    padding: 30px;
-    animation-name: introImg;
-    animation-timeline: view(y 20% -30%);
-    max-width: 100%;
-    --right: 250px;
-    --opacity: 0;
-    --top: 15px;
-    --rotate: 0;
-  }
-  .info-card {
-    transition: 0.5s;
-    opacity: var(--opacity);
-    translate: 0 var(--top);
-  }
-  .img-card {
-    overflow: hidden;
-    aspect-ratio: 2/1.25;
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    border-radius: 15px;
-    translate: var(--right);
-    transition: 0.5s;
-    opacity: var(--opacity);
-    rotate: var(--rotate);
-    & > img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+  @keyframes preview-letter {
+    from {
+      translate: 0 0.5rem;
     }
   }
 
-  .title {
-    margin-bottom: 1rem;
+  .card {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    view-timeline: --card-timeline block;
+    margin-block: 3rem;
+
+    .info-card {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, black 10%, transparent);
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      justify-content: center;
+      padding: 24px;
+
+      opacity: 0;
+      animation: opacity-text;
+      animation-timeline: --card-timeline;
+      animation-duration: 1s;
+      animation-range: entry 80% contain 10%;
+      animation-fill-mode: both;
+
+      & .description {
+        max-width: max(250px, 50%);
+        /* font-size: 12px; */
+      }
+
+      & > * {
+        animation: top-text;
+        animation-timeline: --card-timeline;
+        animation-duration: 1s;
+        animation-range: entry 80% contain 10%;
+        animation-fill-mode: both;
+      }
+
+      .links {
+        position: absolute;
+        right: 24px;
+        top: 24px;
+        display: flex;
+        flex-direction: column;
+
+        & > a {
+          padding: 0.5rem 1rem;
+          color: var(--text);
+          background: rgb(255 253 253 / 41%);
+          display: grid;
+          place-content: center;
+          padding: 11px;
+          border-radius: 39px;
+          transition: 250ms;
+
+          &:hover {
+            background: rgb(255 253 253 / 100%);
+            color: var(--bg);
+          }
+        }
+      }
+    }
+
+    .img-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      width: 100%;
+      height: 100%;
+
+      & > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        translate: -50% -50%;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+
+        animation: card-zoom;
+        animation-timeline: --card-timeline;
+        animation-duration: 100ms;
+        animation-range: entry 0% contain 5%;
+        animation-fill-mode: both;
+        border-radius: 24px;
+      }
+    }
   }
-  .description {
-    margin-block: 0.5rem;
-  }
-  .subtitle {
-    margin-block: 0.7rem;
-  }
+
   .list-tech {
     display: flex;
     gap: 7px;
     flex-wrap: wrap;
   }
-  .links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
-  }
 
-  .links a {
-    color: var(--text);
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    position: relative;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 0.4rem;
-  }
-  .links a::before {
-    content: '→';
-    position: absolute;
-    left: -5px;
-    transition: 0.1s;
-    opacity: 0;
-  }
-
-  .links a:hover::before {
-    opacity: 1;
-    animation: arrow 0.5s infinite alternate;
-  }
-
-  @keyframes arrow {
-    to {
-      translate: 0;
-    }
+  @keyframes top-text {
     from {
-      translate: 3px;
+      translate: 0 10rem;
     }
-  }
-
-  /* cambio de propiedades */
-  @keyframes introImg {
-    from {
-      --right: 250px;
-      --rotate: 25deg;
-    }
-
     to {
-      --right: 0px;
-      --opacity: 1;
-      --top: 0;
-      --rotate: 0;
+      translate: 0 0rem;
     }
   }
-  @media screen and (width <=950px) {
-    .card {
-      --right: 250px;
-      --opacity: 0;
-      --top: 15px;
+
+  @keyframes opacity-text {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
-  @media screen and (width >=850px) {
-    .card {
-      grid-template-columns: clamp(300px, 50vw, 500px) 700px;
+
+  @keyframes card-zoom {
+    from {
+      width: 70%;
+      height: 70%;
     }
+    to {
+      width: 100%;
+      height: 100%;
+    }
+  }
+</style>
+
+<style is:global>
+  .links > a > svg {
+    --size: 3rem;
+    width: var(--size);
+    height: var(--size);
   }
 </style>

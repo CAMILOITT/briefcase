@@ -116,10 +116,10 @@ import WarningIcon from '../assets/icons/info/WarningIcon.astro'
     display: flex;
     align-items: center;
     gap: 5px;
-  }
 
-  .form-label:has(.label-message) {
-    align-items: flex-start;
+    &:has(.label-message) {
+      align-items: flex-start;
+    }
   }
 
   .label-input {
@@ -149,12 +149,28 @@ import WarningIcon from '../assets/icons/info/WarningIcon.astro'
 </style>
 
 <style is:global>
-  .form-contact :not(:is(.label-input, .label-message):invalid:focus) + svg {
-    opacity: 0;
-  }
+  .form-contact {
+    & :not(:is(.label-input, .label-message):invalid:focus) + svg {
+      opacity: 0;
+    }
 
-  .form-contact :where(.label-input, .label-message) + svg {
-    color: red;
-    transition: 0.2s;
+    & :where(.label-input, .label-message) + svg {
+      color: red;
+      transition: 0.2s;
+    }
+
+    .form-label {
+      position: relative;
+
+      .label-input {
+        padding-right: 2.5rem;
+      }
+
+      & svg {
+        position: absolute;
+        right: 0.5rem;
+        opacity: 1;
+      }
+    }
   }
 </style>

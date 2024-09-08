@@ -4,7 +4,7 @@ const listProjects = [
   {
     title: 'Pixel Art',
     description:
-      'Un sitio web de dibujo de pixel art que permite a los usuarios crear obras de arte detalladas pixel a pixel. Con una interfaz intuitiva, los artistas pueden dar vida a sus ideas en forma de arte pixelado. Además, ofrece la opción de exportar las creaciones en formatos populares para compartir fácilmente en línea o utilizar en proyectos',
+      'Un sitio web de dibujo de pixel art que permite a los usuarios crear obras de arte detalladas pixel a pixel. Con una interfaz intuitiva, los artistas pueden dar vida a sus ideas en forma de arte pixelado. Además, ofrece la opción de exportar las creaciones en formatos populares para compartir fácilmente en línea o utilizar en proyectos.',
     img: 'pixel_art',
     tag: [TypeScript, React, Css],
     links: {

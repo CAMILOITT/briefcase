@@ -2,24 +2,7 @@
 import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
 import GithubIcon from '../assets/icons/social/GithubIcon.astro'
 import CVIcon from '../assets/icons/social/CVIcon.astro'
-
-const socialMedia = [
-  {
-    name: 'Github',
-    url: 'https://github.com/camilo-torres',
-    Icon: GithubIcon,
-  },
-  {
-    name: 'Linkedin',
-    url: 'https://www.linkedin.com/in/camilo-torres-9b6b9a1b5/',
-    Icon: LinkedinIcon,
-  },
-  {
-    name: 'CV',
-    url: 'https://docs.google.com/document/d/15GofteV8oRYbcxbblRIbflobqQmu1T2mOgOQV3CPCVU/edit?fbclid=IwAR2YNFAyqwdMW-dg4-eig54dRJqy7r7Y9GtCDi6HLhR2mhfQTyCOo6cjjnw',
-    Icon: CVIcon,
-  },
-]
+import { LINKS_PROFILE } from '../const/socialLinks'
 ---
 
 <script>
@@ -52,7 +35,7 @@ const socialMedia = [
   <div class="navegation">
     <div class="social">
       {
-        socialMedia.map(({ name, url, Icon }) => (
+        LINKS_PROFILE.map(({ name, url, Icon }) => (
           <a
             href={url}
             target="_blank"
@@ -145,7 +128,6 @@ const socialMedia = [
   }
   .social a {
     color: var(--text);
-    text-decoration: none;
     background: rgba(255, 255, 255, 0.283);
     display: grid;
     place-content: center;

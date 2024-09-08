@@ -1,30 +1,7 @@
 ---
-import EmailIcon from '../assets/icons/social/EmailIcon.astro'
-import GithubIcon from '../assets/icons/social/GithubIcon.astro'
-import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
+import { CONTACT_LINKS } from '../const/socialLinks'
 import FormContact from './FormContact.astro'
 import Notification from './Notification.astro'
-
-const socialLinks = [
-  {
-    name: 'Github',
-    url: 'https://github.com/camilo-torres',
-    Icon: GithubIcon,
-    txt: 'CAMILOITT',
-  },
-  {
-    name: 'Linkedin',
-    url: 'https://www.linkedin.com/in/camilo-torres-9b6b9a1b5/',
-    Icon: LinkedinIcon,
-    txt: 'CAMILO TORRES',
-  },
-  {
-    name: 'Email',
-    url: 'mailto:camilocamilo5@outlook.com?subject=Solicitud de contacto&body=Estoy interesado en tu trabajo y me gustaría discutir oportunidades de trabajo junto.',
-    Icon: EmailIcon,
-    txt: 'camilocamilo5@outlook.com',
-  },
-]
 ---
 
 <section class="contacts">
@@ -48,14 +25,15 @@ const socialLinks = [
       <FormContact />
       <div class="links-contact">
         {
-          socialLinks.map(({ name, url, Icon, txt }) => (
+          CONTACT_LINKS.map(({ name, url, Icon, txt }) => (
             <a
               href={url}
               target="_blank"
               rel="noopener noreferrer"
               arial-label={`link to me ${name} profile`}>
               <Icon />
-              {txt}
+              {/* {txt} */}
+              <span>{txt}</span>
             </a>
           ))
         }
@@ -68,13 +46,13 @@ const socialLinks = [
   .contacts {
     display: flex;
     justify-content: center;
-    align-items: center;
     padding-block: 90px;
   }
 
   .card-contact {
+    min-width: 300px;
     width: 80%;
-    padding: 50px 20px 20px;
+    padding: 50px 10px 20px;
     background: rgba(255, 255, 255, 0.668);
     backdrop-filter: blur(5px);
     border-radius: 5px;
@@ -87,6 +65,10 @@ const socialLinks = [
     animation: contact-in;
     animation-timeline: view(y 20% -30%);
     animation-duration: 0.25s;
+
+    & .message {
+      max-width: 600px;
+    }
   }
 
   @keyframes contact-in {
@@ -100,33 +82,41 @@ const socialLinks = [
     }
   }
 
-  .message {
-    max-width: 600px;
-  }
-
   .information-contact {
+    container: links-contacts / inline-size;
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: space-around;
     width: 100%;
     align-items: center;
     gap: 20px 10px;
-    padding-block: 2.3rem;
-  }
+    /* padding-block: 2.3rem; */
 
-  .links-contact {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    align-self: flex-end;
-  }
-  .links-contact a {
-    color: var(--bg);
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+    & > .links-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-self: flex-end;
+
+      & > a {
+        color: var(--bg);
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        & > span {
+          @container links-contacts (max-width: 300px) {
+            display: none;
+          }
+        }
+      }
+
+      @container links-contacts ( max-width: 300px) {
+        flex-direction: row;
+      }
+    }
   }
 </style>

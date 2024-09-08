@@ -1,8 +1,11 @@
 @font-face {
-  font-family: 'Poppins';
+  font-family: Poppins;
+  src:
+    url('/fonts/Poppins/Poppins-Medium.woff2') format('woff2'),
+    url('/fonts/Poppins/Poppins-Medium.woff') format('woff'),
+    url('/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
   font-weight: medium;
   font-style: normal;
-  src: url('/public/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
   font-display: swap;
 }
 
@@ -16,16 +19,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: Poppins, sans-serif;
 }
+
 button,
 input {
   outline: none;
   border: none;
   font-size: unset;
 }
+
 body {
-  background: #000000;
+  background: #000;
 }
 
 p {
@@ -35,4 +40,13 @@ p {
 :is(p, h1, h2, h3, a)::selection {
   color: black;
   background: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  user-select: none;
+
 }
