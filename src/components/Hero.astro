@@ -1,0 +1,187 @@
+---
+
+---
+
+<script>
+  const messages = [
+    'Sumergiéndote en el desarrollo moderno.',
+    'Construyendo el futuro de la web.',
+    'Transformando ideas en experiencias digitales.',
+    'Especialista en soluciones Fullstack.',
+  ]
+  let currentIndex = 0
+  const messageElement = document.querySelector(
+    '.hero-message',
+  ) as HTMLElement | null
+
+  async function typeWriter(text: string) {
+    if (!messageElement) return
+    for (let i = 0; i <= text.length; i++) {
+      messageElement.textContent = text.slice(0, i)
+      await new Promise(resolve => setTimeout(resolve, 100))
+    }
+  }
+
+  async function deleteWriter() {
+    if (!messageElement) return
+    let text = messageElement.textContent || ''
+    for (let i = text.length; i >= 0; i--) {
+      messageElement.textContent = text.slice(0, i)
+      await new Promise(resolve => setTimeout(resolve, 50))
+    }
+  }
+
+  async function startTypingLoop() {
+    while (true) {
+      await typeWriter(messages[currentIndex])
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      await deleteWriter()
+      currentIndex = (currentIndex + 1) % messages.length
+    }
+  }
+
+  if (messageElement) {
+    startTypingLoop()
+  }
+</script>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">CAMILO TORRES</h1>
+    <h2 class="hero-subtitle">DESARROLLADOR FULLSTACK</h2>
+    <div class="message-container">
+      <p class="hero-message"></p>
+      <span class="cursor">|</span>
+    </div>
+    <div class="hero-buttons">
+      <a
+        href="#Intro"
+        class="btn-hero primary"
+        >Ver más</a
+      >
+      <a
+        href="#Contact"
+        class="btn-hero secondary"
+        >Contactar</a
+      >
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  #water-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: blur(2px); /* Soft glow for the foam */
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    padding: 0 4rem;
+    pointer-events: none;
+  }
+
+  .hero-content * {
+    pointer-events: auto;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 12vw, 7rem);
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    color: #eee;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+  }
+
+  .message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-message {
+    font-size: 1.2rem;
+    color: #bbb;
+  }
+
+  .cursor {
+    font-size: 1.4rem;
+    color: #ff8c00;
+    animation: blink 0.8s infinite;
+    margin-left: 4px;
+    font-weight: bold;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .btn-hero {
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.4s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .btn-hero.primary {
+    background: #fff;
+    color: #000;
+  }
+
+  .btn-hero.secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  .btn-hero:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+  }
+
+  .btn-hero.primary:hover {
+    background: #ff8c00;
+    color: #fff;
+  }
+</style>

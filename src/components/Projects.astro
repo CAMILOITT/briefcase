@@ -3,7 +3,9 @@ import listProject from '../const/projects'
 import Card from './Card.astro'
 ---
 
-<section class="projects-section" id="proyectos">
+<section
+  class="projects-section"
+  id="proyectos">
   <!-- Dynamic full-bleed backdrop for visual richness -->
   <div class="projects-header">
     <span class="section-tag">Portafolio</span>
@@ -14,7 +16,9 @@ import Card from './Card.astro'
     <div class="carousel-viewport">
       {
         listProject.map(({ title, description, img, tag, links }, index) => (
-          <div class={`projects-slide ${index === 0 ? 'active' : ''}`} data-index={index}>
+          <div
+            class={`projects-slide ${index === 0 ? 'active' : ''}`}
+            data-index={index}>
             <Card
               title={title}
               description={description}
@@ -30,27 +34,45 @@ import Card from './Card.astro'
     <!-- Custom Control Pill (similar to user screenshot) -->
     <div class="control-pill-container">
       <div class="control-pill">
-        <button class="nav-button prev-button" aria-label="Proyecto anterior">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="nav-button prev-button"
+          aria-label="Proyecto anterior">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         </button>
-        
+
         <!-- Navigation indicators inside the pill or above -->
         <div class="carousel-indicators">
           {
             listProject.map((_, index) => (
-              <button 
-                class={`indicator-dot ${index === 0 ? 'active' : ''}`} 
-                data-index={index} 
+              <button
+                class={`indicator-dot ${index === 0 ? 'active' : ''}`}
+                data-index={index}
                 aria-label={`Ir al proyecto ${index + 1}`}
               />
             ))
           }
         </div>
 
-        <button class="nav-button next-button" aria-label="Siguiente proyecto">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="nav-button next-button"
+          aria-label="Siguiente proyecto">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+            stroke-linecap="round"
+            stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
@@ -61,78 +83,78 @@ import Card from './Card.astro'
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.projects-slide');
-    const dots = document.querySelectorAll('.indicator-dot');
-    const prevButton = document.querySelector('.prev-button');
-    const nextButton = document.querySelector('.next-button');
-    
-    if (slides.length === 0) return;
+    const slides = document.querySelectorAll('.projects-slide')
+    const dots = document.querySelectorAll('.indicator-dot')
+    const prevButton = document.querySelector('.prev-button')
+    const nextButton = document.querySelector('.next-button')
 
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let isTransitioning = false;
+    if (slides.length === 0) return
+
+    let currentIndex = 0
+    const totalSlides = slides.length
+    let isTransitioning = false
 
     function changeSlide(nextIndex: number, direction: 'next' | 'prev') {
-      if (isTransitioning || nextIndex === currentIndex) return;
-      isTransitioning = true;
+      if (isTransitioning || nextIndex === currentIndex) return
+      isTransitioning = true
 
-      const currentSlide = slides[currentIndex];
-      const targetSlide = slides[nextIndex];
+      const currentSlide = slides[currentIndex]
+      const targetSlide = slides[nextIndex]
 
       // Add animation classes
       if (direction === 'next') {
-        currentSlide.classList.add('exit-left');
-        targetSlide.classList.add('active', 'enter-right');
+        currentSlide.classList.add('exit-left')
+        targetSlide.classList.add('active', 'enter-right')
       } else {
-        currentSlide.classList.add('exit-right');
-        targetSlide.classList.add('active', 'enter-left');
+        currentSlide.classList.add('exit-right')
+        targetSlide.classList.add('active', 'enter-left')
       }
 
       // Update indicators immediately
       dots.forEach((dot, idx) => {
         if (idx === nextIndex) {
-          dot.classList.add('active');
+          dot.classList.add('active')
         } else {
-          dot.classList.remove('active');
+          dot.classList.remove('active')
         }
-      });
+      })
 
       // Wait for CSS animations to complete (matches animation duration: 1.2s)
       setTimeout(() => {
-        currentSlide.classList.remove('active', 'exit-left', 'exit-right');
-        targetSlide.classList.remove('enter-left', 'enter-right');
-        currentIndex = nextIndex;
-        isTransitioning = false;
-      }, 1200);
+        currentSlide.classList.remove('active', 'exit-left', 'exit-right')
+        targetSlide.classList.remove('enter-left', 'enter-right')
+        currentIndex = nextIndex
+        isTransitioning = false
+      }, 1200)
     }
 
     prevButton?.addEventListener('click', () => {
-      let prevIndex = currentIndex - 1;
-      if (prevIndex < 0) prevIndex = totalSlides - 1;
-      changeSlide(prevIndex, 'prev');
-    });
+      let prevIndex = currentIndex - 1
+      if (prevIndex < 0) prevIndex = totalSlides - 1
+      changeSlide(prevIndex, 'prev')
+    })
 
     nextButton?.addEventListener('click', () => {
-      let nextIndex = currentIndex + 1;
-      if (nextIndex >= totalSlides) nextIndex = 0;
-      changeSlide(nextIndex, 'next');
-    });
+      let nextIndex = currentIndex + 1
+      if (nextIndex >= totalSlides) nextIndex = 0
+      changeSlide(nextIndex, 'next')
+    })
 
-    dots.forEach((dot) => {
+    dots.forEach(dot => {
       dot.addEventListener('click', () => {
-        if (isTransitioning) return;
-        const indexAttr = dot.getAttribute('data-index');
+        if (isTransitioning) return
+        const indexAttr = dot.getAttribute('data-index')
         if (indexAttr !== null) {
-          const targetIndex = parseInt(indexAttr, 10);
+          const targetIndex = parseInt(indexAttr, 10)
           if (targetIndex > currentIndex) {
-            changeSlide(targetIndex, 'next');
+            changeSlide(targetIndex, 'next')
           } else if (targetIndex < currentIndex) {
-            changeSlide(targetIndex, 'prev');
+            changeSlide(targetIndex, 'prev')
           }
         }
-      });
-    });
-  });
+      })
+    })
+  })
 </script>
 
 <style>
@@ -194,7 +216,7 @@ import Card from './Card.astro'
     z-index: 1;
     transform: scale(1);
     border-radius: 0;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
     transition: opacity 0.3s ease;
     will-change: transform, border-radius, opacity;
   }
@@ -321,7 +343,9 @@ import Card from './Card.astro'
     background: rgba(0, 0, 0, 0.6);
     border-radius: 100px;
     border: 1px solid rgba(0, 255, 100, 0.25); /* Glowing green border matches user screenshot */
-    box-shadow: 0 0 30px rgba(0, 255, 100, 0.15), inset 0 0 15px rgba(0, 255, 100, 0.05);
+    box-shadow:
+      0 0 30px rgba(0, 255, 100, 0.15),
+      inset 0 0 15px rgba(0, 255, 100, 0.05);
     backdrop-filter: blur(15px);
   }
 
@@ -387,7 +411,7 @@ import Card from './Card.astro'
     .projects-header {
       top: 24px;
     }
-    
+
     .section-title {
       font-size: 2.2rem;
     }

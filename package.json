@@ -11,14 +11,16 @@
     "format": "prettier --write . --plugin=prettier-plugin-astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^7.3.4",
-    "astro": "^4.4.8",
-    "resend": "^3.2.0"
+    "@astrojs/vercel": "^10.0.4",
+    "astro": "^6.1.8",
+    "resend": "^3.2.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
+    "@types/three": "^0.184.0",
     "prettier": "^3.2.5",
-    "prettier-plugin-astro": "^0.13.0",
-    "stylelint": "^16.9.0",
-    "stylelint-config-standard": "^36.0.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "stylelint": "^17.8.0",
+    "stylelint-config-standard": "^40.0.0"
   }
 }

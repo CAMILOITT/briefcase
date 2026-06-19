@@ -1,143 +1,74 @@
 ---
-import LinkedinIcon from '../assets/icons/social/LinkedinIcon.astro'
-import GithubIcon from '../assets/icons/social/GithubIcon.astro'
-import CVIcon from '../assets/icons/social/CVIcon.astro'
-import { LINKS_PROFILE } from '../const/socialLinks'
+
 ---
-
-<script>
-  const button = document.querySelector('#BtnContact') as HTMLButtonElement
-
-  button.addEventListener('mousemove', e => {
-    const { clientX, clientY } = e
-
-    const { left, top } = (
-      e.currentTarget as HTMLButtonElement
-    ).getBoundingClientRect()
-
-    const x = Math.floor(clientX - left)
-    const y = Math.floor(clientY - top)
-
-    button.style.setProperty('--y', y + 'px')
-    button.style.setProperty('--x', x + 'px')
-  })
-</script>
 
 <div class="info-me">
   <h1 class="name">Camilo Torres</h1>
-  <h2 class="profession">Fullstack Developer</h2>
+  <h2 class="profession">Desarrollador Fullstack</h2>
   <p class="introduction">
     ¡Hola! Soy un apasionado desarrollador. Mi enfoque se centra en crear
     experiencias web excepcionales y funcionales. Bienvenido a mi portafolio,
     donde podrás explorar algunos de mis proyectos y conocer más sobre mi
     trabajo en el emocionante mundo del desarrollo web.
   </p>
-  <div class="navegation">
-    <div class="social">
-      {
-        LINKS_PROFILE.map(({ name, url, Icon }) => (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            arial-label={`link to me ${name} profile`}>
-            <Icon />
-          </a>
-        ))
-      }
-    </div>
-    <a
-      href="#Contact"
-      id="BtnContact">
-      Contactame
-    </a>
-  </div>
 </div>
 
 <style>
   .info-me {
     max-width: 500px;
-  }
-  .name {
-    font-size: clamp(2rem, 8vw, 4rem);
-  }
-  .profession {
-    font-size: clamp(1.3rem, 5vw, 1.5rem);
-    margin-block: 0rem 1rem;
-    letter-spacing: 0.08rem;
-  }
-  .introduction::selection {
-    background: white;
-    color: black;
-  }
-  .navegation {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
+    flex-direction: column;
+    gap: 1.5rem;
   }
-  .navegation > a {
-    color: #1b1930;
-    text-decoration: none;
-    background: var(--text);
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: bold;
+
+  .avatar-card {
+    width: fit-content;
+    background: #111;
+    padding: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
-  .navegation > a {
-    --x: 50%;
-    --y: 50%;
-    color: #1b1930;
-    text-decoration: none;
-    background: var(--text);
-    padding: 5px 10px;
-    border-radius: 5px;
-    border: 0px;
-    font-weight: bold;
+
+  .avatar-img-container {
     position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
     overflow: hidden;
-    transition: 0.5s;
   }
-  .navegation > a::before {
-    --size: 0;
-    content: '';
-    width: var(--size);
-    height: var(--size);
-    top: var(--y);
-    left: var(--x);
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .avatar-tag {
     position: absolute;
-    translate: -50% -50%;
-    backdrop-filter: invert(150%);
-    border-radius: 50%;
-    transition:
-      0.5s width,
-      0.5s height,
-      0.5s opacity;
-    opacity: 0.5;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    backdrop-filter: blur(5px);
   }
 
-  .navegation > a:hover::before {
-    --size: 100px;
-    opacity: 1;
+  .name {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 700;
   }
 
-  /* links social */
-  .social {
-    display: flex;
-    gap: 1rem;
-  }
-  .social a {
-    color: var(--text);
-    background: rgba(255, 255, 255, 0.283);
-    display: grid;
-    place-content: center;
-    padding: 2px;
-    border-radius: 3px;
+  .profession {
+    font-size: 1.2rem;
+    color: #ccc;
+    margin-top: -0.5rem;
   }
 
-  @media screen and (width <= 375px) {
-    .social {
-      gap: 0.5rem;
-    }
+  .introduction {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #bbb;
   }
 </style>

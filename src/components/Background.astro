@@ -1,16 +1,115 @@
-<div id="Background"></div>
+---
+---
+
+<div id="three-bg"></div>
+
+<script>
+  import * as THREE from 'three';
+
+  let scene, camera, renderer, particles, geometry;
+  let mouseX = 0, mouseY = 0;
+  let targetX = 0, targetY = 0;
+
+  const PARTICLE_COUNT = 20000; // Increased particle count
+
+  function init() {
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+    camera.position.z = 1000;
+
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.getElementById('three-bg').appendChild(renderer.domElement);
+
+    geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    const colors = new Float32Array(PARTICLE_COUNT * 3);
+
+    // Generate positions and colorful RGB for each particle
+    for (let i = 0; i < PARTICLE_COUNT; i++) { // Loop through each particle index
+      // Position
+      const x_pos = (Math.random() - 0.5) * 4000;
+      const y_pos = (Math.random() - 0.5) * 4000;
+      const z_pos = (Math.random() - 0.5) * 4000;
+      positions[i * 3] = x_pos;
+      positions[i * 3 + 1] = y_pos;
+      positions[i * 3 + 2] = z_pos;
+
+      // Color (random RGB for each particle)
+      const color_index = i * 3; // Index for R, G, B components of the current particle
+      colors[color_index] = Math.random();     // Red component
+      colors[color_index + 1] = Math.random(); // Green component
+      colors[color_index + 2] = Math.random(); // Blue component
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 4, // Slightly larger particles
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.7, // Slightly increased opacity
+      blending: THREE.AdditiveBlending
+    });
+
+    particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    document.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('resize', onWindowResize);
+    
+    animate();
+  }
+
+  function onMouseMove(event) {
+    // Normalize mouse position to be centered around (0,0)
+    mouseX = (event.clientX - window.innerWidth / 2) * 2;
+    mouseY = (event.clientY - window.innerHeight / 2) * 2;
+  }
+
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    // Smoothly move target towards mouse position
+    targetX += (mouseX - targetX) * 0.05;
+    targetY += (mouseY - targetY) * 0.05;
+
+    // Rotate particles for subtle motion
+    particles.rotation.x += 0.001;
+    particles.rotation.y += 0.002;
+
+    // Move particles based on mouse position for parallax effect
+    particles.position.x = -targetX * 0.5;
+    particles.position.y = targetY * 0.5;
+
+    // Pulse effect for particles
+    const time = Date.now() * 0.0005;
+    particles.scale.x = 1 + Math.sin(time) * 0.1;
+    particles.scale.y = 1 + Math.sin(time) * 0.1;
+
+    renderer.render(scene, camera);
+  }
+
+  init();
+</script>
 
 <style>
-  #Background {
+  #three-bg {
     position: fixed;
     top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
-    opacity: 0.8;
-    filter: blur(3px);
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 50%, royalblue 150%);
-    width: 100dvw;
-    height: 100dvh;
+    background: radial-gradient(circle at center, #111 0%, #000 100%); /* Subtle dark gradient background */
+    pointer-events: none; /* Allows clicks to pass through */
   }
 </style>

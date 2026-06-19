@@ -1,136 +1,89 @@
 ---
-import { ListSkill } from '../const/skills'
+import Badge from './Badge.astro'
 ---
 
 <div class="skills">
-  <h2>Conociminentos</h2>
+  <h3>Tecnologías</h3>
+  <p class="skills-desc">Las tecnologías que utilizo en mi día en día son.</p>
   <ul class="list-skills">
-    {
-      ListSkill.map(({ name, Icon, bg }) => (
-        <li
-          class="skill"
-          data-name={name}
-          style={`--bg: ${bg}`}>
-          <Icon />
-        </li>
-      ))
-    }
+    <Badge
+      name="HTML"
+      bg="#e34c26"
+    />
+    <Badge
+      name="CSS"
+      bg="#264de4"
+    />
+    <Badge
+      name="JavaScript"
+      bg="#c8a70d"
+    />
+    <Badge
+      name="Typescript"
+      bg="#007acc"
+    />
+    <Badge
+      name="Figma"
+      bg="#"
+    />
+    <Badge
+      name="Python"
+      bg="#3776ab"
+    />
+    <Badge
+      name="IA"
+      bg="#"
+    />
+    <Badge
+      name="PHP"
+      bg="#777bb4"
+    />
+    <Badge
+      name="Vue"
+      bg="#42b883"
+    />
+    <Badge
+      name="React"
+      bg="#1588b2"
+    />
+    <Badge
+      name="Astro"
+      bg="#ff5a03"
+    />
   </ul>
 </div>
 
 <style>
   .skills {
-    display: grid;
-    grid-template-rows: auto 250px;
     color: white;
+    max-width: 300px;
   }
-  h2 {
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .skills-desc {
+    font-size: 0.9rem;
+    color: #ccc;
     margin-bottom: 1rem;
-    grid-column: span 2;
-    text-align: center;
   }
   .list-skills {
-    --columns: 5;
-    --rows: 3;
-    --gap: 5px;
-    --size: 50px;
-    --displacement-y: 1;
-    --displacement-x: 0;
-    overflow: hidden;
-    display: grid;
     list-style: none;
-    grid-template-columns: repeat(var(--columns), var(--size));
-    gap: var(--gap);
-    width: calc(
-      var(--size) * var(--columns) + var(--gap) * (var(--columns) - 1)
-    );
-    height: calc(var(--size) * var(--rows) + var(--gap) * (var(--rows) - 1));
-    padding: 0 35px;
-    box-sizing: content-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    width: 100%;
+    font-weight: bold;
   }
-  .skill {
-    width: var(--size);
-    height: var(--size);
-    background: #ffffff45;
-    animation: moveList 15s infinite alternate;
-    display: grid;
-    place-content: center;
-    padding: 5px;
-    border-radius: 5px;
-    position: relative;
-    transition: 0.4s;
+  .list-skills li {
+    font-size: 0.9rem;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
-  .list-skills:hover .skill {
-    animation-play-state: paused;
-  }
-  .skill > svg {
-    stroke: var(--text);
-    stroke-width: 2px;
-  }
-  .skill:hover {
-    z-index: 1;
-    background: var(--bg);
-  }
-  .skill:hover::before {
-    opacity: 1;
-  }
-  .skill::before {
-    content: attr(data-name);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    opacity: 0;
-    background: #000;
-    padding: 0.5rem;
-    border-radius: 3px;
-    transition: 0.2s;
-  }
-
-  @keyframes moveList {
-    25%,
-    70% {
-      translate: 0 0;
-    }
-    to,
-    75% {
-      translate: calc(100% * var(--displacement-x))
-        calc(100% * var(--displacement-y)+ var(--gap));
-    }
-  }
-
-  @media screen and (width <= 900px) {
-    .list-skills {
-      --columns: 3;
-      --rows: 4;
-      --gap: 5px;
-      --size: 50px;
-
-      --displacement-y: -2;
-      --displacement-x: 0;
-    }
-  }
-
-  @media screen and (width <= 700px) {
-    .list-skills {
-      --columns: 6;
-      --rows: 2;
-      --gap: 5px;
-      --size: 50px;
-
-      --displacement-y: -1;
-      --displacement-x: 0;
-    }
-  }
-
-  @media screen and (width <= 425px) {
-    .list-skills {
-      --columns: 4;
-      --rows: 3;
-      --gap: 5px;
-      --size: 50px;
-      --displacement-y: -2;
-      --displacement-x: 0;
-    }
+  .list-skills li::before {
+    content: '•';
+    color: #fff;
   }
 </style>

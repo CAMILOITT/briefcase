@@ -4,6 +4,7 @@ interface Props {
 }
 const { title } = Astro.props
 
+import Background from '../components/Background.astro'
 import '../styles/global.css'
 
 const Description =
@@ -131,6 +132,7 @@ const Description =
     </script>
   </head>
   <body>
+    <Background />
     <slot />
   </body>
 
@@ -138,5 +140,7 @@ const Description =
     html {
       scroll-behavior: smooth;
     }
+
+    
   </style>
 </html>
