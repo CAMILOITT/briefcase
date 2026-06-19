@@ -1,0 +1,454 @@
+---
+import IntroInfo from './IntroInfo.astro'
+import Skills from './Skills.astro'
+---
+
+<section
+  class="intro"
+  id="Intro">
+  <div class="intro-left">
+    <IntroInfo />
+    <Skills />
+  </div>
+  <div class="intro-right">
+    <!-- Desktop Chat -->
+    <div class="chat-widget desktop-chat">
+      <div class="chat-header">
+        <div class="ai-status">
+          <div class="status-dot"></div>
+          <span>Camilo AI Assistant</span>
+        </div>
+      </div>
+      <div
+        class="chat-content"
+        id="chat-messages-desktop">
+        <div class="message-box ai">
+          <div class="message-header">
+            <span class="avatar">🤖</span>
+            <span class="sender-name">Camilo AI</span>
+          </div>
+          <div class="message-text">
+            ¡Hola! Soy el asistente virtual de Camilo. ¿Qué te gustaría saber
+            sobre su carrera?
+          </div>
+          <span class="timestamp">ahora</span>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            placeholder="Escribe tu mensaje..."
+            class="chat-input"
+            id="chat-input-desktop"
+          />
+          <button
+            class="chat-send"
+            id="chat-send-desktop">
+            <span class="btn-text">Enviar</span>
+            <span class="cooldown-timer hidden">10s</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Floating Button -->
+  <button
+    id="ai-chat-toggle"
+    class="mobile-chat-btn"
+    aria-label="Abrir chat con IA">
+    <svg
+      viewBox="0 0 24 24"
+      width="30"
+      height="30"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+      ></path>
+      <path d="M12 7v4M12 15h.01"></path>
+    </svg>
+  </button>
+
+  <!-- Mobile Chat Modal -->
+  <!-- <div id="chat-modal" class="chat-modal hidden">
+    <div class="modal-content">
+      <div class="chat-header">
+        <div class="ai-status">
+          <div class="status-dot"></div>
+          <span>Camilo AI Chat</span>
+        </div>
+        <button id="close-chat" class="close-btn">&times;</button>
+      </div>
+      <div class="chat-content" id="chat-messages-mobile">
+        <div class="message-box ai">
+            <div class="message-header">
+              <span class="avatar">🤖</span>
+              <span class="sender-name">Camilo AI</span>
+            </div>
+            <div class="message-text">¡Hola! ¿En qué puedo ayudarte?</div>
+        </div>
+      </div>
+      <div class="chat-footer">
+        <div class="input-wrapper">
+            <input type="text" placeholder="Escribe aquí..." class="chat-input" id="chat-input-mobile" />
+            <button class="chat-send" id="chat-send-mobile">
+              <span class="btn-text">Enviar</span>
+              <span class="cooldown-timer hidden">10s</span>
+            </button>
+        </div>
+      </div>
+    </div> -->
+</section>
+
+<script>
+  const knowledgeBase = {
+    name: 'Camilo Torres',
+    role: 'Desarrollador Fullstack',
+    projects: 'Pixel Art, Message Hub y VideoConnect',
+    tech: 'TypeScript, React, Node.js y Astro',
+  }
+
+  const COOLDOWN_TIME = 10000
+  let lastMessageTime = 0
+
+  function getAIResponse(query: string) {
+    const q = query.toLowerCase()
+    if (q.includes('quien') || q.includes('quién'))
+      return `Camilo es un ${knowledgeBase.role} apasionado por la tecnología.`
+    if (q.includes('proyectos'))
+      return `Ha desarrollado aplicaciones como ${knowledgeBase.projects}.`
+    if (q.includes('habilidades') || q.includes('usas'))
+      return `Domina herramientas como ${knowledgeBase.tech}.`
+    return 'Camilo siempre está abierto a nuevas oportunidades. ¿Quieres saber más sobre su experiencia?'
+  }
+
+  function setupChat(inputId: string, sendId: string, messagesId: string) {
+    const input = document.getElementById(inputId) as HTMLInputElement
+    const sendBtn = document.getElementById(sendId) as HTMLButtonElement
+    const messagesContainer = document.getElementById(messagesId)
+    const timer = sendBtn.querySelector('.cooldown-timer')
+    const btnText = sendBtn.querySelector('.btn-text')
+
+    const sendMessage = () => {
+      const now = Date.now()
+      if (now - lastMessageTime < COOLDOWN_TIME) return
+
+      const text = input.value.trim()
+      if (!text || !messagesContainer) return
+
+      lastMessageTime = now
+      startCooldown()
+
+      // User Message Box
+      const userBox = createMessageBox(text, 'user', 'Tú', '👤')
+      messagesContainer.appendChild(userBox)
+      input.value = ''
+      messagesContainer.scrollTop = messagesContainer.scrollHeight
+
+      // AI Response Box
+      setTimeout(() => {
+        const aiBox = createMessageBox(
+          getAIResponse(text),
+          'ai',
+          'Camilo AI',
+          '🤖',
+        )
+        messagesContainer.appendChild(aiBox)
+        messagesContainer.scrollTop = messagesContainer.scrollHeight
+      }, 1000)
+    }
+
+    function startCooldown() {
+      sendBtn.disabled = true
+      timer?.classList.remove('hidden')
+      btnText?.classList.add('hidden')
+
+      let timeLeft = 10
+      const interval = setInterval(() => {
+        timeLeft--
+        if (timer) timer.textContent = `${timeLeft}s`
+        if (timeLeft <= 0) {
+          clearInterval(interval)
+          sendBtn.disabled = false
+          timer?.classList.add('hidden')
+          btnText?.classList.remove('hidden')
+          if (timer) timer.textContent = `10s`
+        }
+      }, 1000)
+    }
+
+    function createMessageBox(
+      text: string,
+      type: 'user' | 'ai',
+      name: string,
+      avatar: string,
+    ) {
+      const box = document.createElement('div')
+      box.className = `message-box ${type}`
+      const time = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      })
+
+      box.innerHTML = `
+        <div class="message-header">
+          <span class="avatar">${avatar}</span>
+          <span class="sender-name">${name}</span>
+        </div>
+        <div class="message-text">${text}</div>
+        <span class="timestamp">${time}</span>
+      `
+      return box
+    }
+
+    sendBtn.addEventListener('click', sendMessage)
+    input.addEventListener('keypress', e => {
+      if (e.key === 'Enter') sendMessage()
+    })
+  }
+
+  setupChat('chat-input-desktop', 'chat-send-desktop', 'chat-messages-desktop')
+  setupChat('chat-input-mobile', 'chat-send-mobile', 'chat-messages-mobile')
+
+  const toggleBtn = document.getElementById('ai-chat-toggle')
+  const chatModal = document.getElementById('chat-modal')
+  const closeBtn = document.getElementById('close-chat')
+
+  toggleBtn?.addEventListener('click', () =>
+    chatModal?.classList.remove('hidden'),
+  )
+  closeBtn?.addEventListener('click', () => chatModal?.classList.add('hidden'))
+</script>
+
+<style>
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 6rem 2rem;
+    background: #000;
+    gap: 4rem;
+    max-width: 1400px;
+    align-items: center;
+    margin-inline: auto;
+  }
+
+  .intro-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #fff;
+  }
+
+  .intro-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  /* Chat Widget Design */
+  .chat-widget {
+    width: 100%;
+    max-width: 450px;
+    height: 600px;
+    background: #080808;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .chat-header {
+    padding: 1.2rem 1.5rem;
+    background: #111;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    border-radius: 28px 28px 0 0;
+  }
+
+  .ai-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .status-dot {
+    width: 10px;
+    height: 10px;
+    background: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff88;
+  }
+
+  .chat-content {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background: #050505;
+  }
+
+  /* Message Boxes (Widgets) */
+  .message-box {
+    padding: 1rem;
+    border-radius: 18px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .message-box.ai {
+    align-self: flex-start;
+    background: #1a1a1a;
+    border-left: 4px solid #333;
+  }
+
+  .message-box.user {
+    align-self: flex-end;
+    background: #ff8c00;
+    color: #000;
+    border-right: 4px solid #cc7000;
+  }
+
+  .message-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .avatar {
+    font-size: 1.2rem;
+  }
+
+  .message-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .timestamp {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
+    opacity: 0.6;
+    text-align: right;
+  }
+
+  /* Footer & Input */
+  .chat-footer {
+    padding: 1.2rem;
+    background: #111;
+    border-radius: 0 0 28px 28px;
+  }
+
+  .input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .chat-input {
+    flex: 1;
+    background: #000;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    outline: none;
+  }
+
+  .chat-send {
+    background: #ff8c00;
+    color: #000;
+    border: none;
+    padding: 0 1.2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 80px;
+    transition: all 0.2s;
+  }
+
+  .chat-send:disabled {
+    background: #333;
+    color: #888;
+    cursor: not-allowed;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Responsive Bits */
+  .mobile-chat-btn {
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background: #ff8c00;
+    border-radius: 50%;
+    z-index: 100;
+    cursor: pointer;
+    border: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chat-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 500px;
+    height: 80vh;
+    background: #080808;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 900px) {
+    .intro {
+      grid-template-columns: 1fr;
+    }
+    .intro-right {
+      display: none;
+    }
+    .mobile-chat-btn {
+      display: flex;
+    }
+  }
+</style>
