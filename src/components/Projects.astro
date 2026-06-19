@@ -3,28 +3,398 @@ import listProject from '../const/projects'
 import Card from './Card.astro'
 ---
 
-<section class="projects">
-  {
-    listProject.map(({ title, description, img, tag, links }) => (
-      <Card
-        title={title}
-        description={description}
-        img={`/img/proyects/${img}/${img}`}
-        listTech={tag}
-        links={links}
-      />
-    ))
-  }
+<section class="projects-section" id="proyectos">
+  <!-- Dynamic full-bleed backdrop for visual richness -->
+  <div class="projects-header">
+    <span class="section-tag">Portafolio</span>
+    <h2 class="section-title">Proyectos</h2>
+  </div>
+
+  <div class="carousel-container">
+    <div class="carousel-viewport">
+      {
+        listProject.map(({ title, description, img, tag, links }, index) => (
+          <div class={`projects-slide ${index === 0 ? 'active' : ''}`} data-index={index}>
+            <Card
+              title={title}
+              description={description}
+              img={`/img/proyects/${img}/${img}`}
+              listTech={tag}
+              links={links}
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Custom Control Pill (similar to user screenshot) -->
+    <div class="control-pill-container">
+      <div class="control-pill">
+        <button class="nav-button prev-button" aria-label="Proyecto anterior">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <!-- Navigation indicators inside the pill or above -->
+        <div class="carousel-indicators">
+          {
+            listProject.map((_, index) => (
+              <button 
+                class={`indicator-dot ${index === 0 ? 'active' : ''}`} 
+                data-index={index} 
+                aria-label={`Ir al proyecto ${index + 1}`}
+              />
+            ))
+          }
+        </div>
+
+        <button class="nav-button next-button" aria-label="Siguiente proyecto">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.projects-slide');
+    const dots = document.querySelectorAll('.indicator-dot');
+    const prevButton = document.querySelector('.prev-button');
+    const nextButton = document.querySelector('.next-button');
+    
+    if (slides.length === 0) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+    let isTransitioning = false;
+
+    function changeSlide(nextIndex: number, direction: 'next' | 'prev') {
+      if (isTransitioning || nextIndex === currentIndex) return;
+      isTransitioning = true;
+
+      const currentSlide = slides[currentIndex];
+      const targetSlide = slides[nextIndex];
+
+      // Add animation classes
+      if (direction === 'next') {
+        currentSlide.classList.add('exit-left');
+        targetSlide.classList.add('active', 'enter-right');
+      } else {
+        currentSlide.classList.add('exit-right');
+        targetSlide.classList.add('active', 'enter-left');
+      }
+
+      // Update indicators immediately
+      dots.forEach((dot, idx) => {
+        if (idx === nextIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      // Wait for CSS animations to complete (matches animation duration: 1.2s)
+      setTimeout(() => {
+        currentSlide.classList.remove('active', 'exit-left', 'exit-right');
+        targetSlide.classList.remove('enter-left', 'enter-right');
+        currentIndex = nextIndex;
+        isTransitioning = false;
+      }, 1200);
+    }
+
+    prevButton?.addEventListener('click', () => {
+      let prevIndex = currentIndex - 1;
+      if (prevIndex < 0) prevIndex = totalSlides - 1;
+      changeSlide(prevIndex, 'prev');
+    });
+
+    nextButton?.addEventListener('click', () => {
+      let nextIndex = currentIndex + 1;
+      if (nextIndex >= totalSlides) nextIndex = 0;
+      changeSlide(nextIndex, 'next');
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        if (isTransitioning) return;
+        const indexAttr = dot.getAttribute('data-index');
+        if (indexAttr !== null) {
+          const targetIndex = parseInt(indexAttr, 10);
+          if (targetIndex > currentIndex) {
+            changeSlide(targetIndex, 'next');
+          } else if (targetIndex < currentIndex) {
+            changeSlide(targetIndex, 'prev');
+          }
+        }
+      });
+    });
+  });
+</script>
+
 <style>
-  .projects {
-    align-items: center;
-    justify-content: space-between;
+  .projects-section {
+    width: 100%;
+    height: 100vh;
     color: var(--text);
     position: relative;
-    scroll-timeline: --project y;
-    max-width: 100dvw;
-    margin-block: 2rem;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .projects-header {
+    position: absolute;
+    top: 40px;
+    left: 5%;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .section-tag {
+    color: var(--color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+  }
+
+  .section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 40%, var(--color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 0.2rem;
+  }
+
+  .carousel-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .carousel-viewport {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .projects-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transform: scale(1);
+    border-radius: 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+    transition: opacity 0.3s ease;
+    will-change: transform, border-radius, opacity;
+  }
+
+  .projects-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  /* Transition Keyframes & Animation rules */
+  .projects-slide.exit-left {
+    animation: exitToLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 3;
+  }
+
+  .projects-slide.enter-right {
+    animation: enterFromRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 4;
+    opacity: 1;
+  }
+
+  .projects-slide.exit-right {
+    animation: exitToRight 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 3;
+  }
+
+  .projects-slide.enter-left {
+    animation: enterFromLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    z-index: 4;
+    opacity: 1;
+  }
+
+  @keyframes exitToLeft {
+    0% {
+      transform: scale(1);
+      border-radius: 0px;
+    }
+    30% {
+      transform: scale(0.6);
+      border-radius: 32px;
+    }
+    70% {
+      transform: scale(0.6) translateX(-120%);
+      border-radius: 32px;
+    }
+    100% {
+      transform: scale(0.6) translateX(-120%);
+      border-radius: 32px;
+    }
+  }
+
+  @keyframes enterFromRight {
+    0% {
+      transform: scale(0.6) translateX(120%);
+      border-radius: 32px;
+    }
+    30% {
+      transform: scale(0.6) translateX(120%);
+      border-radius: 32px;
+    }
+    70% {
+      transform: scale(0.6) translateX(0);
+      border-radius: 32px;
+    }
+    100% {
+      transform: scale(1) translateX(0);
+      border-radius: 0px;
+    }
+  }
+
+  @keyframes exitToRight {
+    0% {
+      transform: scale(1);
+      border-radius: 0px;
+    }
+    30% {
+      transform: scale(0.6);
+      border-radius: 32px;
+    }
+    70% {
+      transform: scale(0.6) translateX(120%);
+      border-radius: 32px;
+    }
+    100% {
+      transform: scale(0.6) translateX(120%);
+      border-radius: 32px;
+    }
+  }
+
+  @keyframes enterFromLeft {
+    0% {
+      transform: scale(0.6) translateX(-120%);
+      border-radius: 32px;
+    }
+    30% {
+      transform: scale(0.6) translateX(-120%);
+      border-radius: 32px;
+    }
+    70% {
+      transform: scale(0.6) translateX(0);
+      border-radius: 32px;
+    }
+    100% {
+      transform: scale(1) translateX(0);
+      border-radius: 0px;
+    }
+  }
+
+  /* Control Pill Container styling based on user screenshot */
+  .control-pill-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .control-pill {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 12px 24px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 100px;
+    border: 1px solid rgba(0, 255, 100, 0.25); /* Glowing green border matches user screenshot */
+    box-shadow: 0 0 30px rgba(0, 255, 100, 0.15), inset 0 0 15px rgba(0, 255, 100, 0.05);
+    backdrop-filter: blur(15px);
+  }
+
+  .nav-button {
+    background: none;
+    border: none;
+    color: rgb(0, 255, 100); /* Green chevrons matches user screenshot */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+
+    & > svg {
+      width: 28px;
+      height: 28px;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      background: rgba(0, 255, 100, 0.1);
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(0, 255, 100, 0.2);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+
+    &.active {
+      background: rgb(0, 255, 100); /* Active state matches green theme */
+      transform: scale(1.2);
+    }
+
+    &:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .projects-header {
+      top: 24px;
+    }
+    
+    .section-title {
+      font-size: 2.2rem;
+    }
+
+    .control-pill {
+      gap: 1rem;
+      padding: 8px 16px;
+    }
   }
 </style>
